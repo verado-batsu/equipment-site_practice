@@ -1,24 +1,25 @@
-// import { Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
+
+import styles from './SharedLayout.module.scss';
+const { header } = styles;
 
 export function SharedLayout() {
     return (
         <>
-            {/* <Container>
-                <Header>
-                    <Logo>
-                        <span role="img" aria-label="computer icon">
-                            💻
-                        </span>{' '}
-                        GoMerch Store
-                    </Logo>
+            <header className={header}>
+                <div className="container">
+                    <Link to="/">KMIT</Link>
                     <nav>
-                        <Link to="/">Home</Link>
-                        <Link to="/about">About</Link>
-                        <Link to="/products">Products</Link>
+                        <NavLink to="/">Home</NavLink>
+                        <NavLink to="/rolling">Rolling Equipment</NavLink>
+                        <NavLink to="/drawing">Drawing Equipment</NavLink>
+                        <NavLink to="/pressing">Pressing Equipment</NavLink>
+                        <NavLink to="/forging">Forging Equipment</NavLink>
+                        <NavLink to="/stamping">Stamping Equipment</NavLink>
                     </nav>
-                </Header>
-                <Outlet />
-            </Container> */}
+                </div>
+            </header>
+            <Outlet />
         </>
     );
 }

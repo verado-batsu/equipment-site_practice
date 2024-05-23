@@ -1,38 +1,50 @@
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+
+import { SharedLayout } from 'components/SharedLayout/SharedLayout';
 import { Home } from '../../pages/Home';
-import { RollingEquipment } from '../../pages/Rolling-equipment';
-import { DrawingEquipment } from '../../pages/Drawing-equipment';
-import { PressingEquipment } from '../../pages/Pressing-equipment';
-import { ForgingEquipment } from '../../pages/Forging-equipment ';
-import { StampingEquipment } from '../../pages/Stamping-equipment';
+import { RollingEquipmentList } from '../../pages/RollingEquipmentList';
+import { DrawingEquipmentList } from '../../pages/DrawingEquipmentList';
+import { PressingEquipmentList } from '../../pages/PressingEquipmentList';
+import { ForgingEquipmentList } from '../../pages/ForgingEquipmentList ';
+import { StampingEquipmentList } from '../../pages/StampingEquipmentList';
+import { EquipmentDetails } from '../../pages/EquipmentDetails';
+import { NotFound } from '../../pages/NotFound.jsx';
 
 import './App.scss';
 
 function App() {
     return (
-        <>
-            <header>
-                <div>
-                    <p>KMIT</p>
-                </div>
-                <nav>
-                    <Link to="/">Home</Link>
-                    <Link to="/rolling">Rolling Equipment</Link>
-                    <Link to="/drawing">Drawing Equipment</Link>
-                    <Link to="/pressing">Pressing Equipment</Link>
-                    <Link to="/forging">Forging Equipment</Link>
-                    <Link to="/stamping">Stamping Equipment</Link>
-                </nav>
-            </header>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/rolling" element={<RollingEquipment />} />
-                <Route path="/drawing" element={<DrawingEquipment />} />
-                <Route path="/pressing" element={<PressingEquipment />} />
-                <Route path="/forging" element={<ForgingEquipment />} />
-                <Route path="/stamping" element={<StampingEquipment />} />
-            </Routes>
-        </>
+        <Routes>
+            <Route path="/" element={<SharedLayout />}>
+                <Route index element={<Home />} />
+                <Route path="/rolling" element={<RollingEquipmentList />} />
+                <Route
+                    path="/rolling/:equipmentId"
+                    element={<EquipmentDetails />}
+                />
+                <Route path="/drawing" element={<DrawingEquipmentList />} />
+                <Route
+                    path="/drawing/:equipmentId"
+                    element={<EquipmentDetails />}
+                />
+                <Route path="/pressing" element={<PressingEquipmentList />} />
+                <Route
+                    path="/pressing/:equipmentId"
+                    element={<EquipmentDetails />}
+                />
+                <Route path="/forging" element={<ForgingEquipmentList />} />
+                <Route
+                    path="/forging/:equipmentId"
+                    element={<EquipmentDetails />}
+                />
+                <Route path="/stamping" element={<StampingEquipmentList />} />
+                <Route
+                    path="/stamping/:equipmentId"
+                    element={<EquipmentDetails />}
+                />
+                <Route path="*" element={<NotFound />} />
+            </Route>
+        </Routes>
     );
 }
 
