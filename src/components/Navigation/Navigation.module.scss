@@ -1,0 +1,29 @@
+.navigation {
+}
+
+.navList {
+	display: flex;
+	gap: 30px;
+}
+
+.navItem {
+}
+
+.navLink {
+	color: rgba(255, 255, 255, 0.25);
+	font-size: 24px;
+	letter-spacing: -0.96px;
+
+	cursor: pointer;
+
+	transition: color 250ms ease;
+
+	&:hover,
+	&:focus {
+		color: #fff;
+	}
+}
+
+.navLinkActive {
+	color: #97d28b;
+}

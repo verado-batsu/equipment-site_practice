@@ -4,6 +4,8 @@ import { useMediaQuery } from 'react-responsive';
 
 import { CloseIcon, MenuIcon } from 'assets/images/header';
 
+import { arrOfSection } from 'data';
+
 import styles from './BurgerMenu.module.scss';
 const {
     headerMenu,
@@ -22,8 +24,6 @@ const {
     menuLink,
     menuLinkActive,
 } = styles;
-
-const arrOfSection = ['Rolling', 'Drawing', 'Pressing', 'Forging', 'Stamping'];
 
 export function BurgerMenu() {
     const [isMenuShown, setIsMenuShown] = useState(false);
@@ -114,6 +114,7 @@ export function BurgerMenu() {
                                         ].join(' ')
                                     }
                                     to="/"
+                                    onClick={handleMenuClick}
                                 >
                                     Home
                                 </NavLink>
@@ -136,6 +137,7 @@ export function BurgerMenu() {
                                             ].join(' ')
                                         }
                                         to={`/${title.toLowerCase()}`}
+                                        onClick={handleMenuClick}
                                     >
                                         {title} Equipment
                                     </NavLink>

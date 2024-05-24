@@ -1,0 +1,1 @@
+export const arrOfSection = ['Rolling', 'Dragging', 'Pressing', 'Forging', 'Stamping'];

@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
 import { Home } from '../../pages/Home';
 import { RollingEquipmentList } from '../../pages/RollingEquipmentList';
-import { DrawingEquipmentList } from '../../pages/DrawingEquipmentList';
+import { DraggingEquipmentList } from '../../pages/DraggingEquipmentList';
 import { PressingEquipmentList } from '../../pages/PressingEquipmentList';
 import { ForgingEquipmentList } from '../../pages/ForgingEquipmentList ';
 import { StampingEquipmentList } from '../../pages/StampingEquipmentList';
@@ -22,7 +22,7 @@ function App() {
                     path="/rolling/:equipmentId"
                     element={<EquipmentDetails />}
                 />
-                <Route path="/drawing" element={<DrawingEquipmentList />} />
+                <Route path="/dragging" element={<DraggingEquipmentList />} />
                 <Route
                     path="/drawing/:equipmentId"
                     element={<EquipmentDetails />}
