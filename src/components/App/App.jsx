@@ -1,13 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
-import { Home } from '../../pages/Home';
-import { RollingEquipmentList } from '../../pages/RollingEquipmentList';
-import { DraggingEquipmentList } from '../../pages/DraggingEquipmentList';
-import { PressingEquipmentList } from '../../pages/PressingEquipmentList';
-import { ForgingEquipmentList } from '../../pages/ForgingEquipmentList ';
-import { StampingEquipmentList } from '../../pages/StampingEquipmentList';
-import { EquipmentDetails } from '../../pages/EquipmentDetails';
+import { Home } from '../../pages/Home/Home';
+import { RollingEquipmentList } from '../../pages/RollingEquipmentList/RollingEquipmentList';
+import { DraggingEquipmentList } from '../../pages/DraggingEquipmentList/DraggingEquipmentList';
+import { PressingEquipmentList } from '../../pages/PressingEquipmentList/PressingEquipmentList';
+import { ForgingEquipmentList } from '../../pages/ForgingEquipmentList/ForgingEquipmentList ';
+import { StampingEquipmentList } from '../../pages/StampingEquipmentList/StampingEquipmentList';
+import { EquipmentDetails } from '../../pages/EquipmentDetails/EquipmentDetails';
 import { NotFound } from '../../pages/NotFound.jsx';
 
 import './App.scss';
