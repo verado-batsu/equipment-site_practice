@@ -1,6 +1,10 @@
 @import "../../constants/sizes";
 @import "../../constants/paddings";
 
+body._lock {
+	overflow: hidden;
+}
+
 .container {
 	margin: 0 auto;
 	padding: 0 $mobilePadding;

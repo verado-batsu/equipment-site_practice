@@ -1,0 +1,27 @@
+@import "constants/sizes";
+
+.header {
+	background-color: #f3f5fa;
+}
+
+.headerBody {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 36px 0;
+}
+
+.headerLogoLink {
+	font-size: 33px;
+	letter-spacing: -1.32px;
+
+	color: #173d33;
+
+	transition: color 250ms ease;
+
+	&:hover,
+	&:focus {
+		color: #97d28b;
+	}
+}
