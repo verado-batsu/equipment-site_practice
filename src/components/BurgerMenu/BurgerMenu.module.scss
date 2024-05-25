@@ -40,6 +40,8 @@
 	opacity: 0;
 	pointer-events: none;
 	transition: opacity 0.3s ease;
+
+	z-index: 999;
 }
 
 .menuBodyActive {
@@ -55,10 +57,6 @@
 		flex-direction: row-reverse;
 		width: $tablet;
 	}
-
-	// @media screen and (min-width: $desktop) {
-	// 	width: $desktop;
-	// }
 }
 
 .menuBox {
