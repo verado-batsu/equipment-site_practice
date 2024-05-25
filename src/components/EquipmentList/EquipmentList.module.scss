@@ -1,0 +1,33 @@
+@import "../../constants/sizes";
+@import "../../constants/paddings";
+
+.listWrapper {
+}
+
+.equipmentList {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.equipmentItem {
+	padding: 1px;
+
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+.equipmentLink {
+}
+
+.equipmentImg {
+	width: 210px;
+}
+
+.equipmentTitle {
+	padding: 4px;
+	margin-top: 8px;
+	margin-bottom: 0;
+	color: black;
+}

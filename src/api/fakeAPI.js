@@ -1,40 +1,11 @@
-import { nanoid } from 'nanoid'
-
-const categories = {
-	rolling: 'rolling',
-	dragging: 'dragging',
-	pressing: 'pressing',
-	forging: 'forging',
-	stamping: 'stamping',
-}
-
-const equipments = [
-	{
-		id: nanoid(),
-		category: categories.dragging,
-		model: 'dragging',
-		photo: '',
-		features: {
-
-		}
-	},
-	{
-		id: nanoid(),
-		category: categories.rolling,
-		model: 'rolling',
-		photo: '',
-		features: {
-
-		}
-	}
-]
+import { equipmentData } from "data";
 
 export const getEquipments = (category) => {
-	return equipments.filter((equipment) => 
+	return equipmentData.filter((equipment) => 
 		equipment.category === category
 	);
 };
 
 export const getEquipmentById = (equipmentId) => {
-  return equipments.find((equipment) => equipment.id === equipmentId);
+  return equipmentData.find((equipment) => equipment.id === equipmentId);
 };
