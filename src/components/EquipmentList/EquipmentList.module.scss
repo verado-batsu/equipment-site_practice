@@ -5,13 +5,16 @@
 }
 
 .equipmentList {
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 10px;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
 
 	@media screen and (min-width: $tablet) {
-		// justify-content: start;
+		grid-template-columns: 1fr 1fr;
+	}
+
+	@media screen and (min-width: $desktop) {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
 	}
 }
 
@@ -23,6 +26,10 @@
 }
 
 .equipmentLink {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
 	color: black;
 }
 
