@@ -1,5 +1,4 @@
 @import "../../constants/sizes";
-@import "../../constants/paddings";
 
 .listWrapper {
 }
@@ -19,10 +18,6 @@
 }
 
 .equipmentItem {
-	padding: 1px;
-
-	border: 1px solid black;
-	border-radius: 4px;
 }
 
 .equipmentLink {
@@ -30,16 +25,5 @@
 	align-items: center;
 	justify-content: center;
 
-	color: black;
-}
-
-.equipmentImg {
-	width: 210px;
-}
-
-.equipmentTitle {
-	padding: 4px;
-	margin-top: 8px;
-	margin-bottom: 0;
 	color: black;
 }

@@ -1,17 +1,52 @@
+@import "../../constants/sizes";
 .equipmentDetails {
+	padding: 30px 0;
+
+	@media screen and (min-width: $tablet) {
+		padding: 50px 0;
+	}
+
+	@media screen and (min-width: $desktop) {
+		padding: 100px 0;
+	}
+}
+
+.detailsWrapper {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 10px;
+
+	@media screen and (min-width: $tablet) {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr auto;
+		gap: 20px;
+	}
+
+	@media screen and (min-width: $desktop) {
+		gap: 40px;
+	}
 }
 
 .equipmentImg {
 }
 
-.equipmentInfo {
-}
-
-.equipmentTitle {
-}
-
 .equipmentFeatures {
+	@media screen and (min-width: $tablet) {
+		grid-row-start: 1;
+		grid-row-end: 3;
+		grid-column-start: 2;
+	}
+
+	@media screen and (min-width: $desktop) {
+		grid-row-start: 1;
+		grid-row-end: 2;
+		grid-column-start: 2;
+	}
 }
 
 .equipmentDescr {
+	@media screen and (min-width: $desktop) {
+		grid-column-start: 1;
+		grid-column-end: 3;
+	}
 }
