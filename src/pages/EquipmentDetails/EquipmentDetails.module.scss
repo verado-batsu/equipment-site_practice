@@ -17,17 +17,19 @@
 	gap: 10px;
 
 	@media screen and (min-width: $tablet) {
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr 1.5fr;
 		grid-template-rows: 1fr auto;
 		gap: 20px;
 	}
 
 	@media screen and (min-width: $desktop) {
+		grid-template-columns: 1fr 2fr;
 		gap: 40px;
 	}
 }
 
 .equipmentImg {
+	width: 100%;
 }
 
 .equipmentFeatures {
