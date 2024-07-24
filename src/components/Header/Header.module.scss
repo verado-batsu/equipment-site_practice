@@ -12,6 +12,12 @@
 	padding: 36px 0;
 }
 
+.headerNavigationWrapper {
+	display: flex;
+	align-items: center;
+	gap: 50px;
+}
+
 .headerLogoLink {
 	font-size: 33px;
 	letter-spacing: -1.32px;

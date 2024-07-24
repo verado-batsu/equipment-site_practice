@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import { CloseIcon, MenuIcon } from 'assets/images/header';
 
-import { arrOfSection } from 'data';
+import { arrOfHeaderSection } from 'data';
 
 import styles from './BurgerMenu.module.scss';
 const {
@@ -97,29 +97,7 @@ export function BurgerMenu() {
                             <span className={closeBtnText}>close</span>
                         </button>
                         <ul className={menuList}>
-                            <li className={menuItem}>
-                                <NavLink
-                                    className={({
-                                        isActive,
-                                        isPending,
-                                        isTransitioning,
-                                    }) =>
-                                        [
-                                            menuLink,
-                                            isPending ? 'pending' : '',
-                                            isActive ? menuLinkActive : '',
-                                            isTransitioning
-                                                ? 'transitioning'
-                                                : '',
-                                        ].join(' ')
-                                    }
-                                    to="/"
-                                    onClick={handleMenuClick}
-                                >
-                                    Home
-                                </NavLink>
-                            </li>
-                            {arrOfSection.map(title => (
+                            {arrOfHeaderSection.map(title => (
                                 <li key={title} className={menuItem}>
                                     <NavLink
                                         className={({
@@ -136,7 +114,11 @@ export function BurgerMenu() {
                                                     : '',
                                             ].join(' ')
                                         }
-                                        to={`/${title.toLowerCase()}`}
+                                        to={
+                                            title === 'Home'
+                                                ? '/'
+                                                : `/${title.toLowerCase()}`
+                                        }
                                         onClick={handleMenuClick}
                                     >
                                         {title} Equipment

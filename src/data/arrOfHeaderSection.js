@@ -1,0 +1,1 @@
+export const arrOfHeaderSection = ["Home", "Equipments"] 
