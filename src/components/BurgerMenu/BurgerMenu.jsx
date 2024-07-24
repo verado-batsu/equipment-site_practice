@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
 import { CloseIcon, MenuIcon } from 'assets/images/header';
 
-import { arrOfHeaderSection } from 'data';
+import { arrOfAuthTitle, arrOfHeaderSection } from 'data';
 
 import styles from './BurgerMenu.module.scss';
 const {
@@ -19,6 +19,9 @@ const {
     closeBtn,
     closeBtnText,
     closeIcon,
+    authList,
+    authItem,
+    authLink,
     menuList,
     menuItem,
     menuLink,
@@ -123,6 +126,19 @@ export function BurgerMenu() {
                                     >
                                         {title} Equipment
                                     </NavLink>
+                                </li>
+                            ))}
+                        </ul>
+                        <ul className={authList}>
+                            {arrOfAuthTitle.map(title => (
+                                <li key={title} className={authItem}>
+                                    <Link
+                                        className={authLink}
+                                        to={`/${title.toLowerCase()}`}
+                                        onClick={handleMenuClick}
+                                    >
+                                        {title}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>

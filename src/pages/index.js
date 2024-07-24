@@ -1,12 +1,6 @@
-import { HomePage } from './HomePage/HomePage'
-import { EquipmentsPage } from './EquipmentsPage/EquipmentsPage'
-import { EquipmentDetailsPage } from './EquipmentDetailsPage/EquipmentDetailsPage'
-import { NotFound } from './NotFound'
-
-
-export {
-	HomePage,
-	EquipmentsPage,
-	EquipmentDetailsPage,
-	NotFound
-}
+export * from './HomePage/HomePage'
+export * from './EquipmentsPage/EquipmentsPage'
+export * from './EquipmentDetailsPage/EquipmentDetailsPage'
+export * from './SignUpPage/SignUpPage'
+export * from './LogInPage/LogInPage'
+export * from './NotFound'

@@ -5,6 +5,8 @@ import {
     HomePage,
     EquipmentsPage,
     EquipmentDetailsPage,
+    SignUpPage,
+    LogInPage,
     NotFound,
 } from '../../pages';
 
@@ -20,6 +22,8 @@ function App() {
                     path="/equipments/:equipmentId"
                     element={<EquipmentDetailsPage />}
                 />
+                <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/login" element={<LogInPage />} />
                 <Route path="*" element={<NotFound />} />
             </Route>
         </Routes>

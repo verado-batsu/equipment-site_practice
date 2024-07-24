@@ -115,7 +115,7 @@
 }
 
 .menuList {
-	// flex-grow: 1;
+	flex-grow: 1;
 	margin-bottom: 20px;
 
 	&::before {
@@ -126,6 +126,15 @@
 
 		background-color: #fff;
 	}
+
+	// &::after {
+	// 	content: "";
+	// 	display: block;
+	// 	height: 1px;
+	// 	margin-top: 16px;
+
+	// 	background-color: #fff;
+	// }
 }
 
 .menuItem {
@@ -151,4 +160,29 @@
 
 .menuLinkActive {
 	color: #97d28b;
+}
+
+.authList {
+	display: flex;
+	justify-content: end;
+	gap: 20px;
+	margin-bottom: 20px;
+}
+
+.authItem {
+}
+
+.authLink {
+	color: rgba(255, 255, 255, 0.25);
+	font-size: 24px;
+	letter-spacing: -0.96px;
+
+	cursor: pointer;
+
+	transition: color 250ms ease;
+
+	&:hover,
+	&:focus {
+		color: #fff;
+	}
 }
