@@ -15,7 +15,7 @@ const {
     equipmentDescr,
 } = styles;
 
-export function EquipmentDetails() {
+export function EquipmentDetailsPage() {
     const { equipmentId } = useParams();
     const equipment = getEquipmentById(equipmentId);
 
