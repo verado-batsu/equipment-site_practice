@@ -5,11 +5,13 @@
 }
 
 .headerBody {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-
 	padding: 36px 0;
+
+	@media screen and (max-width: calc($desktop - 1px)) {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 }
 
 .headerNavigationWrapper {

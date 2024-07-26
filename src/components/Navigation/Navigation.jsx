@@ -1,9 +1,18 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
-import { arrOfHeaderSection } from 'constants';
+import { arrOfHeaderSection, arrOfAuthTitle } from 'constants';
 
 import styles from './Navigation.module.scss';
-const { navigation, navList, navItem, navLink, navLinkActive } = styles;
+const {
+    navigation,
+    navList,
+    navItem,
+    navLink,
+    navLinkActive,
+    authList,
+    authItem,
+    authLink,
+} = styles;
 
 export function Navigation() {
     return (
@@ -17,10 +26,26 @@ export function Navigation() {
                                     ' '
                                 )
                             }
+                            to={
+                                title === 'Home'
+                                    ? '/'
+                                    : `/${title.toLowerCase()}`
+                            }
+                        >
+                            {title}
+                        </NavLink>
+                    </li>
+                ))}
+            </ul>
+            <ul className={authList}>
+                {arrOfAuthTitle.map(title => (
+                    <li key={title} className={authItem}>
+                        <Link
+                            className={authLink}
                             to={`/${title.toLowerCase()}`}
                         >
-                            {title} Equipment
-                        </NavLink>
+                            {title}
+                        </Link>
                     </li>
                 ))}
             </ul>

@@ -22,6 +22,7 @@ export function Header() {
                         </Link>
                         {!isBurgerShown && <Navigation />}
                     </div>
+
                     {isBurgerShown && <BurgerMenu />}
                 </div>
             </div>

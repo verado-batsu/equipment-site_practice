@@ -103,18 +103,10 @@ export function BurgerMenu() {
                             {arrOfHeaderSection.map(title => (
                                 <li key={title} className={menuItem}>
                                     <NavLink
-                                        className={({
-                                            isActive,
-                                            isPending,
-                                            isTransitioning,
-                                        }) =>
+                                        className={({ isActive }) =>
                                             [
                                                 menuLink,
-                                                isPending ? 'pending' : '',
                                                 isActive ? menuLinkActive : '',
-                                                isTransitioning
-                                                    ? 'transitioning'
-                                                    : '',
                                             ].join(' ')
                                         }
                                         to={
@@ -124,7 +116,7 @@ export function BurgerMenu() {
                                         }
                                         onClick={handleMenuClick}
                                     >
-                                        {title} Equipment
+                                        {title}
                                     </NavLink>
                                 </li>
                             ))}
