@@ -1,2 +1,15 @@
+@import "constants/sizes";
+
 .signUpSection {
+	display: flex;
+	justify-content: center;
+	padding: 30px 0;
+
+	@media screen and (min-width: $tablet) {
+		padding: 50px 0;
+	}
+
+	@media screen and (min-width: $desktop) {
+		padding: 100px 0;
+	}
 }

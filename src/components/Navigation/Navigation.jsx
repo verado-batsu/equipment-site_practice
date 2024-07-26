@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-import { arrOfHeaderSection } from 'data';
+import { arrOfHeaderSection } from 'constants';
 
 import styles from './Navigation.module.scss';
 const { navigation, navList, navItem, navLink, navLinkActive } = styles;

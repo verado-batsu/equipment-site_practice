@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import { CloseIcon, MenuIcon } from 'assets/images/header';
 
-import { arrOfAuthTitle, arrOfHeaderSection } from 'data';
+import { arrOfAuthTitle, arrOfHeaderSection } from 'constants';
 
 import styles from './BurgerMenu.module.scss';
 const {

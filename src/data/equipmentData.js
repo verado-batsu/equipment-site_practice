@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
 
-import { categories } from './categories'
+import { categories } from '../constants/categories'
 
 import firstForgeEquipmentPhoto from '../assets/images/equipmentsPhotoData/forging/С41-75/1.jpg'
 

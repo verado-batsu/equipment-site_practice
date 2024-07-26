@@ -1,3 +1,7 @@
 export function LogInPage() {
-    return <>LogInPage</>;
+    return (
+        <section>
+            <div className="container">LogInPage</div>
+        </section>
+    );
 }

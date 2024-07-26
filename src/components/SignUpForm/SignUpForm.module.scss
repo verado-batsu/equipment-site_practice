@@ -1,0 +1,113 @@
+@import "constants/sizes";
+
+.signupForm {
+	display: flex;
+	flex-direction: column;
+	padding: 36px 12px;
+
+	background-color: #eaedf1;
+
+	@media screen and (min-width: $tablet) {
+		width: 342px;
+		padding: 36px 24px;
+	}
+
+	@media screen and (min-width: $desktop) {
+		width: 596px;
+		padding: 48px;
+	}
+}
+
+.signupFormLabelsWrapper {
+	margin-bottom: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 28px;
+
+	@media screen and (min-width: $desktop) {
+		margin-bottom: 32px;
+	}
+}
+
+.signupFormLabel {
+}
+
+.signupFormTitle {
+	display: block;
+	margin-bottom: 8px;
+
+	color: #173d33;
+	text-align: justify;
+	font-size: 16px;
+	letter-spacing: -0.64px;
+
+	@media screen and (min-width: $desktop) {
+		margin-bottom: 12px;
+	}
+}
+
+.signupFormInput {
+	width: 100%;
+	padding-bottom: 8px;
+
+	background-color: transparent;
+	border-bottom: 1px solid #97d28b;
+	color: #828382;
+	font-size: 18px;
+	letter-spacing: -0.72px;
+
+	@media screen and (min-width: $desktop) {
+		font-size: 20px;
+		letter-spacing: -0.8px;
+	}
+}
+
+.signupFormInputError {
+	border-color: #d28b8b;
+}
+
+.signupFormError {
+	margin-top: 8px;
+	text-align: end;
+	color: #d28b8b;
+
+	@media screen and (min-width: $desktop) {
+		margin-top: 12px;
+	}
+}
+
+.signupFormSubmit {
+	padding: 14px 4px 14px 4px;
+
+	border-radius: 500px;
+	border: 1px solid #97d28b;
+	color: #173d33;
+	font-size: 16px;
+	line-height: calc(18px / 16px);
+	letter-spacing: -0.64px;
+
+	transition:
+		color 250ms ease,
+		border-color 250ms ease,
+		background-color 250ms ease;
+
+	&:hover,
+	&:focus {
+		color: #97d28b;
+		background-color: #173d33;
+		border-color: #173d33;
+	}
+}
+
+.signupFormSubmit.disabled {
+	opacity: 0.5;
+
+	&:hover,
+	&:focus {
+		color: #173d33;
+		background-color: transparent;
+		border-color: #97d28b;
+	}
+
+	cursor: default;
+}

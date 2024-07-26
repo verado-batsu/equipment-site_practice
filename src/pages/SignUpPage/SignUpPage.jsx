@@ -6,7 +6,9 @@ const { signUpSection } = styles;
 export function SignUpPage() {
     return (
         <section className={signUpSection}>
-            <SignUpForm />
+            <div className="container">
+                <SignUpForm />
+            </div>
         </section>
     );
 }
