@@ -1,6 +1,6 @@
 @import "constants/sizes";
 
-.signupForm {
+.loginForm {
 	display: flex;
 	flex-direction: column;
 	padding: 36px 12px;
@@ -18,7 +18,7 @@
 	}
 }
 
-.signupFormLabelsWrapper {
+.loginFormLabelsWrapper {
 	margin-bottom: 16px;
 	display: flex;
 	flex-direction: column;
@@ -29,11 +29,11 @@
 	}
 }
 
-.signupFormLabel {
+.loginFormLabel {
 	position: relative;
 }
 
-.signupFormTitle {
+.loginFormTitle {
 	display: block;
 	margin-bottom: 8px;
 
@@ -47,7 +47,7 @@
 	}
 }
 
-.signupFormInput {
+.loginFormInput {
 	width: 100%;
 	padding-right: 30px;
 	padding-bottom: 8px;
@@ -64,11 +64,11 @@
 	}
 }
 
-.signupFormInputError {
+.loginFormInputError {
 	border-color: #d28b8b;
 }
 
-.signupFormError {
+.loginFormError {
 	margin-top: 8px;
 	text-align: end;
 	color: #d28b8b;
@@ -87,7 +87,7 @@
 .visibilityBtnIcon {
 }
 
-.signupFormSubmit {
+.loginFormSubmit {
 	padding: 14px 4px 14px 4px;
 
 	border-radius: 500px;
@@ -110,7 +110,7 @@
 	}
 }
 
-.signupFormSubmit.disabled {
+.loginFormSubmit.disabled {
 	opacity: 0.5;
 
 	&:hover,

@@ -7,39 +7,35 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 import { emailRegexp } from 'constants';
 
-import styles from './SignUpForm.module.scss';
+import styles from './LogInForm.module.scss';
 const {
-    signupForm,
-    signupFormLabelsWrapper,
-    signupFormLabel,
-    signupFormTitle,
-    signupFormInput,
-    signupFormInputError,
-    signupFormError,
+    loginForm,
+    loginFormLabelsWrapper,
+    loginFormLabel,
+    loginFormTitle,
+    loginFormInput,
+    loginFormInputError,
+    loginFormError,
     visibilityBtn,
     visibilityBtnIcon,
-    signupFormSubmit,
+    loginFormSubmit,
     disabled,
 } = styles;
 
 const userSchema = yup.object({
-    name: yup.string().required(),
     email: yup
         .string()
         .matches(emailRegexp, 'Email is not in correct format')
         .required(),
     password: yup.string().min(6).required(),
-    teacherId: yup.string().required(),
 });
 
-export function SignUpForm() {
+export function LogInForm() {
     const [showPassword, setShowPassword] = useState(false);
 
     const initialValues = {
-        name: '',
         email: '',
         password: '',
-        teacherId: '',
     };
 
     function handleSubmit(person, { resetForm }) {
@@ -63,17 +59,11 @@ export function SignUpForm() {
         >
             {({ errors, touched }) => {
                 const isError = Object.keys(errors).length !== 0;
-                let isNameError = false;
                 let isEmailError = false;
                 let isPasswordError = false;
-                let isTeacherIdError = false;
 
                 Object.keys(errors).forEach(errorName => {
                     Object.keys(touched).forEach(touch => {
-                        if (errorName === 'name' && touch === 'name') {
-                            isNameError = true;
-                        }
-
                         if (errorName === 'email' && touch === 'email') {
                             isEmailError = true;
                         }
@@ -81,66 +71,41 @@ export function SignUpForm() {
                         if (errorName === 'password' && touch === 'password') {
                             isPasswordError = true;
                         }
-
-                        if (
-                            errorName === 'teacherId' &&
-                            touch === 'teacherId'
-                        ) {
-                            isTeacherIdError = true;
-                        }
                     });
                 });
 
                 return (
-                    <Form className={signupForm}>
-                        <div className={signupFormLabelsWrapper}>
-                            <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>* Name:</span>
-                                <Field
-                                    className={
-                                        isNameError
-                                            ? `${signupFormInput} ${signupFormInputError}`
-                                            : signupFormInput
-                                    }
-                                    type="text"
-                                    name="name"
-                                    placeholder="Джон Роузі"
-                                />
-                                <ErrorMessage
-                                    className={signupFormError}
-                                    component="p"
-                                    name="name"
-                                />
-                            </label>
-                            <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>
+                    <Form className={loginForm}>
+                        <div className={loginFormLabelsWrapper}>
+                            <label className={loginFormLabel}>
+                                <span className={loginFormTitle}>
                                     * E-mail:
                                 </span>
                                 <Field
                                     className={
                                         isEmailError
-                                            ? `${signupFormInput} ${signupFormInputError}`
-                                            : signupFormInput
+                                            ? `${loginFormInput} ${loginFormInputError}`
+                                            : loginFormInput
                                     }
                                     type="email"
                                     name="email"
                                     placeholder="johnrosie@gmail.com"
                                 />
                                 <ErrorMessage
-                                    className={signupFormError}
+                                    className={loginFormError}
                                     component="p"
                                     name="email"
                                 />
                             </label>
-                            <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>
+                            <label className={loginFormLabel}>
+                                <span className={loginFormTitle}>
                                     * Password:
                                 </span>
                                 <Field
                                     className={
                                         isPasswordError
-                                            ? `${signupFormInput} ${signupFormInputError}`
-                                            : signupFormInput
+                                            ? `${loginFormInput} ${loginFormInputError}`
+                                            : loginFormInput
                                     }
                                     type={showPassword ? 'text' : 'password'}
                                     name="password"
@@ -161,41 +126,22 @@ export function SignUpForm() {
                                     )}
                                 </button>
                                 <ErrorMessage
-                                    className={signupFormError}
+                                    className={loginFormError}
                                     component="p"
                                     name="password"
-                                />
-                            </label>
-                            <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>
-                                    * Teacher Id:
-                                </span>
-                                <Field
-                                    className={
-                                        isTeacherIdError
-                                            ? `${signupFormInput} ${signupFormInputError}`
-                                            : signupFormInput
-                                    }
-                                    type="password"
-                                    name="teacherId"
-                                />
-                                <ErrorMessage
-                                    className={signupFormError}
-                                    component="p"
-                                    name="teacherId"
                                 />
                             </label>
                         </div>
                         <button
                             className={
                                 isError
-                                    ? `${signupFormSubmit} ${disabled}`
-                                    : signupFormSubmit
+                                    ? `${loginFormSubmit} ${disabled}`
+                                    : loginFormSubmit
                             }
                             type="submit"
                             disabled={isError}
                         >
-                            <span>Sign Up</span>
+                            <span>LogIn</span>
                         </button>
                     </Form>
                 );
