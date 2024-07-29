@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -6,6 +7,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 import { emailRegexp } from 'constants';
+import { signUp } from '../../redux/users/usersOperations';
 
 import styles from './SignUpForm.module.scss';
 const {
@@ -33,6 +35,7 @@ const userSchema = yup.object({
 });
 
 export function SignUpForm() {
+    const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
 
     const initialValues = {
@@ -45,7 +48,7 @@ export function SignUpForm() {
     function handleSubmit(person, { resetForm }) {
         Notify.success(`Form submitted`);
 
-        console.log(person);
+        dispatch(signUp(person));
 
         resetForm();
     }
