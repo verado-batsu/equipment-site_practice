@@ -10,6 +10,7 @@ import { emailRegexp } from 'constants';
 import { signUp } from '../../redux/users/usersOperations';
 
 import styles from './SignUpForm.module.scss';
+import { useNavigate } from 'react-router-dom';
 const {
     signupForm,
     signupFormLabelsWrapper,
@@ -36,6 +37,7 @@ const userSchema = yup.object({
 
 export function SignUpForm() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
     const initialValues = {
@@ -45,10 +47,13 @@ export function SignUpForm() {
         teacherId: '',
     };
 
-    function handleSubmit(person, { resetForm }) {
+    async function handleSubmit(person, { resetForm }) {
         Notify.success(`Form submitted`);
 
-        dispatch(signUp(person));
+        try {
+            await dispatch(signUp(person, navigate));
+            navigate('/login', { replace: true });
+        } catch (error) {}
 
         resetForm();
     }
