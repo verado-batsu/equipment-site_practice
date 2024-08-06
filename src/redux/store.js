@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import {
-	persistStore, persistReducer,
+	persistStore,
+	persistReducer,
 	FLUSH,
 	REHYDRATE,
 	PAUSE,
@@ -22,7 +23,7 @@ const persistedUser = persistReducer(persistConfigUser, usersReducer)
 
 export const store = configureStore({
 	reducer: {
-		user: usersReducer,
+		auth: usersReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

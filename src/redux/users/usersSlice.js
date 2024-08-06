@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Notify } from 'notiflix'
-import { logIn, signUp } from './usersOperations'
-import { replace } from 'formik'
+import { logIn, logOut, signUp } from './usersOperations'
 
 const initialState = {
 	user: { name: null, email: null },
@@ -15,13 +14,16 @@ export const usersSlice = createSlice({
 	initialState,
 	extraReducers: builder => {
 		builder
-			.addCase(signUp.fulfilled, (state, { payload }) => {
+			.addCase(signUp.fulfilled, () => {
 				Notify.success(`User registered. Please login`);
 			})
 			.addCase(logIn.fulfilled, (state, { payload }) => {
 				state.user = payload.user;
 				state.token = payload.token;
 				state.isLoggedIn = true;
+			})
+		.addCase(logOut.fulfilled, (state) => {
+				state = initialState;
 			})
 	},
 })

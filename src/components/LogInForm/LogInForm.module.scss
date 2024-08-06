@@ -82,6 +82,10 @@
 	position: absolute;
 	top: 32px;
 	right: 3px;
+
+	@media screen and (min-width: $desktop) {
+		top: 40px;
+	}
 }
 
 .visibilityBtnIcon {

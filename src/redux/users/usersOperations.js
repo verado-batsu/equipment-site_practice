@@ -30,11 +30,10 @@ export const logIn = createAsyncThunk('users/logIn', async user => {
 	}
 })
 
-export const logOut = createAsyncThunk('users/logOut', async user => {
+export const logOut = createAsyncThunk('users/logOut', async () => {
 	try {
-		const { data } = await axios.post('/users/logout');
+		await axios.post('/users/logout');
 		token.clear()
-		return data
 	} catch (error) {
 		
 	}

@@ -1,5 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
+import { UserMenu } from 'components/UserMenu/UserMenu';
 import { arrOfHeaderSection, arrOfAuthTitle } from 'constants';
 
 import styles from './Navigation.module.scss';
@@ -15,6 +17,8 @@ const {
 } = styles;
 
 export function Navigation() {
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+
     return (
         <nav className={navigation}>
             <ul className={navList}>
@@ -37,18 +41,22 @@ export function Navigation() {
                     </li>
                 ))}
             </ul>
-            <ul className={authList}>
-                {arrOfAuthTitle.map(title => (
-                    <li key={title} className={authItem}>
-                        <Link
-                            className={authLink}
-                            to={`/${title.toLowerCase()}`}
-                        >
-                            {title}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            {isLoggedIn ? (
+                <UserMenu />
+            ) : (
+                <ul className={authList}>
+                    {arrOfAuthTitle.map(title => (
+                        <li key={title} className={authItem}>
+                            <Link
+                                className={authLink}
+                                to={`/${title.toLowerCase()}`}
+                            >
+                                {title}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            )}
         </nav>
     );
 }
