@@ -51,7 +51,7 @@ export function SignUpForm() {
         Notify.success(`Form submitted`);
 
         try {
-            await dispatch(signUp(person, navigate));
+            await dispatch(signUp(person));
             navigate('/login', { replace: true });
         } catch (error) {}
 

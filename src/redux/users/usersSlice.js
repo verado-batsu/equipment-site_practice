@@ -22,8 +22,10 @@ export const usersSlice = createSlice({
 				state.token = payload.token;
 				state.isLoggedIn = true;
 			})
-		.addCase(logOut.fulfilled, (state) => {
-				state = initialState;
+			.addCase(logOut.fulfilled, (state, _) => {
+				state.user = { name: null, email: null };
+				state.token = null;
+				state.isLoggedIn = false;
 			})
 	},
 })

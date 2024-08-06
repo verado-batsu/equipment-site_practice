@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -34,6 +35,7 @@ const userSchema = yup.object({
 
 export function LogInForm() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
     const initialValues = {
@@ -41,10 +43,13 @@ export function LogInForm() {
         password: '',
     };
 
-    function handleSubmit(person, { resetForm }) {
+    async function handleSubmit(person, { resetForm }) {
         Notify.success(`Form submitted`);
 
-        dispatch(logIn(person));
+        try {
+            await dispatch(logIn(person));
+            navigate('/equipments', { replace: true });
+        } catch (error) {}
 
         resetForm();
     }
