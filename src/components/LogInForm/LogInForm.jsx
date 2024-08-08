@@ -44,7 +44,7 @@ export function LogInForm() {
     };
 
     async function handleSubmit(person, { resetForm }) {
-        Notify.success(`Form submitted`);
+        Notify.info(`Form submitted`);
 
         try {
             await dispatch(logIn(person));

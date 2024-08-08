@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
@@ -10,9 +12,17 @@ import {
     NotFound,
 } from '../../pages';
 
+import { getCurrentUser } from '../../redux/users/usersOperations';
+
 import './App.scss';
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getCurrentUser());
+    }, [dispatch]);
+
     return (
         <Routes>
             <Route path="/" element={<SharedLayout />}>
