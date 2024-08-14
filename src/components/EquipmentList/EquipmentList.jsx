@@ -12,11 +12,11 @@ export function EquipmentList({ equipments }) {
     return (
         <div className={listWrapper}>
             <ul className={equipmentList}>
-                {equipments ? (
+                {equipments?.length > 0 ? (
                     equipments.map(equipment => (
-                        <li key={equipment.id} className={equipmentItem}>
+                        <li key={equipment._id} className={equipmentItem}>
                             <Link
-                                to={`${equipment.id}`}
+                                to={`${equipment._id}`}
                                 className={equipmentLink}
                             >
                                 <Card sx={{ maxWidth: 345 }}>
@@ -24,7 +24,7 @@ export function EquipmentList({ equipments }) {
                                         component="img"
                                         alt={equipment.model}
                                         height="140"
-                                        image={equipment.photos[0]}
+                                        image={equipment.photos[0].url}
                                     />
                                     <CardContent>
                                         <Typography

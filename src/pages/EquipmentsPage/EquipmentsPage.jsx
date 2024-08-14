@@ -1,18 +1,32 @@
-import { getEquipments } from 'api/fakeAPI';
+import { useState } from 'react';
+import { Notify } from 'notiflix';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
+import { useGetEquipmentsQuery } from '../../redux/equipments/equipmentsApi';
 
 import { EquipmentList } from 'components/EquipmentList/EquipmentList';
 
 import styles from './EquipmentsPage.module.scss';
-const { equipmentsSection, equipmentsTitle } = styles;
+const { equipmentsSection } = styles;
 
 export function EquipmentsPage() {
-    const equipments = getEquipments('forging');
+    const [params, setParams] = useState('');
+
+    const { data, isFetching, error } = useGetEquipmentsQuery(params);
+
     return (
         <section className={equipmentsSection}>
             <div className="container">
-                <h2 className={equipmentsTitle}>Equipments Page</h2>
-                <EquipmentList equipments={equipments} />
+                {data && <EquipmentList equipments={data} />}
+
+                {isFetching && (
+                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <CircularProgress />
+                    </Box>
+                )}
             </div>
+            {error && Notify.failure(error)}
         </section>
     );
 }

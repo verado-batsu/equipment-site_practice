@@ -10,7 +10,7 @@ const { userMenu, userName, logOutBtn, logOutBtnIcon } = styles;
 export function UserMenu() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const name = useSelector(state => state.auth.user?.name);
+    const name = useSelector(state => state.auth.user.name);
 
     async function handleLogOut() {
         try {

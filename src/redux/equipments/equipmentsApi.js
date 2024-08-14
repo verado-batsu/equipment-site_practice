@@ -27,7 +27,7 @@ export const equipmentsApi = createApi({
 	tagTypes: ['Equipments'],
 	endpoints: (builder) => ({
 		getEquipments: builder.query({
-			query: () => ({ url: '/equipments' }),
+			query: (params = '') => ({ url: `/equipments?${params}` }),
 			providesTags: ['Equipments'],
 		}),
 		getEquipmentById: builder.query({
