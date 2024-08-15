@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 
 import { useGetEquipmentsQuery } from '../../redux/equipments/equipmentsApi';
 
+import { FilterBar } from 'components/FilterBar/FilterBar';
 import { EquipmentList } from 'components/EquipmentList/EquipmentList';
 
 import styles from './EquipmentsPage.module.scss';
@@ -15,9 +16,22 @@ export function EquipmentsPage() {
 
     const { data, isFetching, error } = useGetEquipmentsQuery(params);
 
+    function handleEquipmentFilter(e) {
+        const category = e.target.textContent.toLowerCase();
+
+        if (category === 'all') {
+            setParams('');
+            return;
+        }
+
+        setParams(`category=${category}`);
+    }
+
     return (
         <section className={equipmentsSection}>
             <div className="container">
+                <FilterBar handleEquipmentFilter={handleEquipmentFilter} />
+
                 {data && <EquipmentList equipments={data} />}
 
                 {isFetching && (

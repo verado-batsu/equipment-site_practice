@@ -1,0 +1,1 @@
+export const arrOfCategories = ['Rolling', 'Dragging', 'Pressing', 'Forging', 'Stamping'];

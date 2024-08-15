@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+import { useSelector } from 'react-redux';
+
+import { UserMenu } from 'components/UserMenu/UserMenu';
 
 import { CloseIcon, MenuIcon } from 'assets/images/header';
 
@@ -30,6 +33,8 @@ const {
 
 export function BurgerMenu() {
     const [isMenuShown, setIsMenuShown] = useState(false);
+
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
     const isDesktop = useMediaQuery({ minWidth: 1440 });
 
@@ -121,19 +126,23 @@ export function BurgerMenu() {
                                 </li>
                             ))}
                         </ul>
-                        <ul className={authList}>
-                            {arrOfAuthTitle.map(title => (
-                                <li key={title} className={authItem}>
-                                    <Link
-                                        className={authLink}
-                                        to={`/${title.toLowerCase()}`}
-                                        onClick={handleMenuClick}
-                                    >
-                                        {title}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
+                        {isLoggedIn ? (
+                            <UserMenu />
+                        ) : (
+                            <ul className={authList}>
+                                {arrOfAuthTitle.map(title => (
+                                    <li key={title} className={authItem}>
+                                        <Link
+                                            className={authLink}
+                                            to={`/${title.toLowerCase()}`}
+                                            onClick={handleMenuClick}
+                                        >
+                                            {title}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
                 </div>
             </nav>
