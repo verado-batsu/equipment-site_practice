@@ -13,6 +13,7 @@ const { equipmentsSection } = styles;
 
 export function EquipmentsPage() {
     const [params, setParams] = useState('');
+    const [category, setCategory] = useState('all');
 
     const { data, isFetching, error } = useGetEquipmentsQuery(params);
 
@@ -21,16 +22,21 @@ export function EquipmentsPage() {
 
         if (category === 'all') {
             setParams('');
+            setCategory('all');
             return;
         }
 
         setParams(`category=${category}`);
+        setCategory(category);
     }
 
     return (
         <section className={equipmentsSection}>
             <div className="container">
-                <FilterBar handleEquipmentFilter={handleEquipmentFilter} />
+                <FilterBar
+                    handleEquipmentFilter={handleEquipmentFilter}
+                    currentCategory={category}
+                />
 
                 {data && <EquipmentList equipments={data} />}
 

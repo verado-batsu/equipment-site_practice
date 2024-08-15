@@ -1,31 +1,37 @@
-import Button from '@mui/material/Button';
-
 import { arrOfCategories } from 'constants';
 
 import styles from './FilterBar.module.scss';
-const { filterBarList, filterBarItem } = styles;
+const { filterBarList, filterBarItem, filterBarBtn, active } = styles;
 
-export function FilterBar({ handleEquipmentFilter }) {
+export function FilterBar({ handleEquipmentFilter, currentCategory }) {
     return (
         <ul className={filterBarList}>
             <li className={filterBarItem}>
-                <Button
+                <button
+                    className={
+                        currentCategory === 'all'
+                            ? `${filterBarBtn} ${active}`
+                            : filterBarBtn
+                    }
                     type="button"
-                    variant="outlined"
                     onClick={handleEquipmentFilter}
                 >
                     All
-                </Button>
+                </button>
             </li>
             {arrOfCategories.map(category => (
                 <li className={filterBarItem} key={category}>
-                    <Button
+                    <button
+                        className={
+                            currentCategory === category.toLowerCase()
+                                ? `${filterBarBtn} ${active}`
+                                : filterBarBtn
+                        }
                         type="button"
-                        variant="outlined"
                         onClick={handleEquipmentFilter}
                     >
                         {category}
-                    </Button>
+                    </button>
                 </li>
             ))}
         </ul>
