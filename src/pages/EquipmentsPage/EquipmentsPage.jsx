@@ -42,7 +42,11 @@ export function EquipmentsPage() {
 
                 {isFetching && (
                     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                        <CircularProgress />
+                        <CircularProgress
+                            sx={{
+                                color: 'rgba(23, 61, 51, 0.75)',
+                            }}
+                        />
                     </Box>
                 )}
             </div>

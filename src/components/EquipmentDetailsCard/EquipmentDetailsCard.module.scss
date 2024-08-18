@@ -1,0 +1,43 @@
+@import "constants/sizes";
+
+.detailsWrapper {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 10px;
+
+	@media screen and (min-width: $tablet) {
+		grid-template-columns: 1fr 1.5fr;
+		grid-template-rows: 1fr auto;
+		gap: 20px;
+	}
+
+	@media screen and (min-width: $desktop) {
+		grid-template-columns: 1fr 2fr;
+		gap: 40px;
+	}
+}
+
+.equipmentImg {
+	width: 100%;
+}
+
+.equipmentFeatures {
+	@media screen and (min-width: $tablet) {
+		grid-row-start: 1;
+		grid-row-end: 3;
+		grid-column-start: 2;
+	}
+
+	@media screen and (min-width: $desktop) {
+		grid-row-start: 1;
+		grid-row-end: 2;
+		grid-column-start: 2;
+	}
+}
+
+.equipmentDescr {
+	@media screen and (min-width: $desktop) {
+		grid-column-start: 1;
+		grid-column-end: 3;
+	}
+}

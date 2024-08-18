@@ -1,0 +1,17 @@
+@import "../../constants/sizes";
+
+.slider__card {
+	max-width: 320px;
+
+	@media screen and (min-width: $tablet) {
+		max-width: 342px;
+	}
+
+	@media screen and (min-width: $desktop) {
+		max-width: 596px;
+	}
+}
+
+.slider__img {
+	width: 100%;
+}

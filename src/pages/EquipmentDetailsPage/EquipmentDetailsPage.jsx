@@ -1,61 +1,41 @@
 import { useParams } from 'react-router-dom';
 
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import { Notify } from 'notiflix';
 
-import { getEquipmentById } from 'api/fakeAPI';
+import { useGetEquipmentByIdQuery } from '../../redux/equipments/equipmentsApi';
+
+import { EquipmentDetailsCard } from 'components/EquipmentDetailsCard/EquipmentDetailsCard';
 
 import styles from './EquipmentDetails.module.scss';
-const {
-    equipmentDetails,
-    detailsWrapper,
-    equipmentImg,
-    equipmentFeatures,
-    equipmentDescr,
-} = styles;
+const { equipmentDetails } = styles;
 
 export function EquipmentDetailsPage() {
     const { equipmentId } = useParams();
-    const equipment = getEquipmentById(equipmentId);
+
+    const {
+        data: equipment,
+        isFetching,
+        error,
+    } = useGetEquipmentByIdQuery(equipmentId);
 
     return (
         <section className={equipmentDetails}>
             <div className="container">
-                <div className={detailsWrapper}>
-                    <img
-                        className={equipmentImg}
-                        src={equipment?.photos[0] || ''}
-                        alt={equipment?.model || ''}
-                    />
-                    <Card className={equipmentFeatures}>
-                        <CardContent>
-                            <Typography variant="h5">
-                                {equipment?.model || ''}
-                            </Typography>
-                            <Typography variant="h6">
-                                Характеристики:
-                            </Typography>
-                            <Typography
-                                variant="body2"
-                                style={{ whiteSpace: 'pre-wrap' }}
-                            >
-                                {equipment?.features || ''}
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                    <Card className={equipmentDescr}>
-                        <CardContent>
-                            <Typography
-                                variant="body2"
-                                style={{ whiteSpace: 'pre-wrap' }}
-                            >
-                                {equipment?.describe || ''}
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </div>
+                {isFetching ? (
+                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <CircularProgress
+                            sx={{
+                                color: 'rgba(23, 61, 51, 0.75)',
+                            }}
+                        />
+                    </Box>
+                ) : (
+                    <EquipmentDetailsCard equipment={equipment} />
+                )}
             </div>
+            {error && Notify.failure(error)}
         </section>
     );
 }
