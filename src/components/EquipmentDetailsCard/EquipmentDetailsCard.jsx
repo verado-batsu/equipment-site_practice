@@ -17,6 +17,10 @@ export function EquipmentDetailsCard({ equipment }) {
     return (
         <div className={detailsWrapper}>
             <EquipmentSlider imagesData={equipment.photos} />
+            {/* <div>
+                <button className="prev">Prev</button>
+                <button className="next">Next</button>
+            </div> */}
             <Card className={equipmentFeatures}>
                 <CardContent>
                     <Typography variant="h5">

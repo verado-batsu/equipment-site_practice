@@ -1,8 +1,14 @@
 @import "../../constants/sizes";
 
-.slider__card {
-	max-width: 320px;
+.slider__container {
+	position: relative;
+	min-width: 0;
+}
 
+.slider__wrapper {
+}
+
+.slider__card {
 	@media screen and (min-width: $tablet) {
 		max-width: 342px;
 	}
@@ -14,4 +20,19 @@
 
 .slider__img {
 	width: 100%;
+}
+
+.slider__prev,
+.slider__next {
+	position: absolute;
+	top: 50%;
+
+	z-index: 1;
+}
+
+.slider__prev {
+}
+
+.slider__next {
+	right: 0;
 }
