@@ -1,12 +1,17 @@
 import { Link } from 'react-router-dom';
 
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 import styles from './EquipmentList.module.scss';
-const { listWrapper, equipmentList, equipmentItem, equipmentLink } = styles;
+const {
+    listWrapper,
+    equipmentList,
+    equipmentItem,
+    equipmentLink,
+    equipmentCardContent,
+} = styles;
 
 export function EquipmentList({ equipments }) {
     return (
@@ -26,7 +31,7 @@ export function EquipmentList({ equipments }) {
                                         height="140"
                                         image={equipment.photos[0].url}
                                     />
-                                    <CardContent>
+                                    <div className={equipmentCardContent}>
                                         <Typography
                                             gutterBottom
                                             variant="h5"
@@ -34,7 +39,15 @@ export function EquipmentList({ equipments }) {
                                         >
                                             {equipment.model}
                                         </Typography>
-                                    </CardContent>
+                                        <Typography
+                                            gutterBottom
+                                            variant="subtitle2"
+                                            component="div"
+                                        >
+                                            Останні зміни додав{' '}
+                                            {equipment.owner.name}
+                                        </Typography>
+                                    </div>
                                 </Card>
                             </Link>
                         </li>

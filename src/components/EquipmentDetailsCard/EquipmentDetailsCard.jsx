@@ -7,24 +7,34 @@ import { EquipmentSlider } from 'components/EquipmentSlider/EquipmentSlider';
 const {
     detailsWrapper,
     equipmentFeatures,
+    equipmentHeader,
     equipmentFeaturesList,
     equipmentFeaturesItem,
     equipmentDescr,
 } = styles;
 
 export function EquipmentDetailsCard({ equipment }) {
-    // console.log(equipment);
     return (
         <div className={detailsWrapper}>
             <EquipmentSlider imagesData={equipment.photos} />
-            {/* <div>
-                <button className="prev">Prev</button>
-                <button className="next">Next</button>
-            </div> */}
             <Card className={equipmentFeatures}>
                 <CardContent>
-                    <Typography variant="h5">
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            wordWrap: 'break-word',
+                        }}
+                    >
                         {equipment?.model || ''}
+                    </Typography>
+                    <Typography
+                        variant="subtitle2"
+                        sx={{
+                            color: 'rgba(129, 129, 129, 0.75)',
+                            textDecoration: 'underline',
+                        }}
+                    >
+                        Останні зміни додав {equipment?.owner.name || ''}
                     </Typography>
                     <Typography variant="h6">Характеристики:</Typography>
                     <ul className={equipmentFeaturesList}>
