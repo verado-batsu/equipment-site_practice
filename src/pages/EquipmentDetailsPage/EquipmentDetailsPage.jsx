@@ -10,7 +10,7 @@ import { EquipmentDetailsCard } from 'components/EquipmentDetailsCard/EquipmentD
 import { BackToEquipmentsButton } from 'components/BackToEquipmentsBtn/BackToEquipmentsButton';
 
 import styles from './EquipmentDetails.module.scss';
-const { equipmentDetails } = styles;
+const { equipmentDetailsSection } = styles;
 
 export function EquipmentDetailsPage() {
     const { equipmentId } = useParams();
@@ -22,7 +22,7 @@ export function EquipmentDetailsPage() {
     } = useGetEquipmentByIdQuery(equipmentId);
 
     return (
-        <section className={equipmentDetails}>
+        <section className={equipmentDetailsSection}>
             <div className="container">
                 <BackToEquipmentsButton />
                 {isFetching ? (

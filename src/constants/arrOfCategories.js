@@ -1,1 +1,1 @@
-export const arrOfCategories = ['Rolling', 'Dragging', 'Pressing', 'Forging', 'Stamping'];
+export const arrOfCategories = ['rolling', 'dragging', 'pressing', 'forging', 'stamping'];

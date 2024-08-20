@@ -2,7 +2,9 @@ import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { UserMenu } from 'components/UserMenu/UserMenu';
+
 import { arrOfHeaderSection, arrOfAuthTitle } from 'constants';
+import { findRightPath } from 'helpers';
 
 import styles from './Navigation.module.scss';
 const {
@@ -30,11 +32,7 @@ export function Navigation() {
                                     ' '
                                 )
                             }
-                            to={
-                                title === 'Home'
-                                    ? '/'
-                                    : `/${title.toLowerCase()}`
-                            }
+                            to={findRightPath(title)}
                         >
                             {title}
                         </NavLink>

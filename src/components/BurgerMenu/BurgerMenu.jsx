@@ -8,6 +8,7 @@ import { UserMenu } from 'components/UserMenu/UserMenu';
 import { CloseIcon, MenuIcon } from 'assets/images/header';
 
 import { arrOfAuthTitle, arrOfHeaderSection } from 'constants';
+import { findRightPath } from 'helpers';
 
 import styles from './BurgerMenu.module.scss';
 const {
@@ -105,26 +106,26 @@ export function BurgerMenu() {
                             <span className={closeBtnText}>close</span>
                         </button>
                         <ul className={menuList}>
-                            {arrOfHeaderSection.map(title => (
-                                <li key={title} className={menuItem}>
-                                    <NavLink
-                                        className={({ isActive }) =>
-                                            [
-                                                menuLink,
-                                                isActive ? menuLinkActive : '',
-                                            ].join(' ')
-                                        }
-                                        to={
-                                            title === 'Home'
-                                                ? '/'
-                                                : `/${title.toLowerCase()}`
-                                        }
-                                        onClick={handleMenuClick}
-                                    >
-                                        {title}
-                                    </NavLink>
-                                </li>
-                            ))}
+                            {arrOfHeaderSection.map(title => {
+                                return (
+                                    <li key={title} className={menuItem}>
+                                        <NavLink
+                                            className={({ isActive }) =>
+                                                [
+                                                    menuLink,
+                                                    isActive
+                                                        ? menuLinkActive
+                                                        : '',
+                                                ].join(' ')
+                                            }
+                                            to={findRightPath(title)}
+                                            onClick={handleMenuClick}
+                                        >
+                                            {title}
+                                        </NavLink>
+                                    </li>
+                                );
+                            })}
                         </ul>
                         {isLoggedIn ? (
                             <UserMenu />

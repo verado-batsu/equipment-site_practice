@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -10,7 +11,6 @@ import { emailRegexp } from 'constants';
 import { signUp } from '../../redux/users/usersOperations';
 
 import styles from './SignUpForm.module.scss';
-import { useNavigate } from 'react-router-dom';
 const {
     signupForm,
     signupFormLabelsWrapper,

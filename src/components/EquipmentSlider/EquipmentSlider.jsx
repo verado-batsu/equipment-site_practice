@@ -32,10 +32,10 @@ export function EquipmentSlider({ imagesData }) {
                     );
                 })}
             </Swiper>
-            <button className="prev slider__prev">
+            <button className="prev slider__prev" type="button">
                 <ArrowBackIosNewIcon />
             </button>
-            <button className="next slider__next">
+            <button className="next slider__next" type="button">
                 <ArrowForwardIosIcon />
             </button>
         </div>
