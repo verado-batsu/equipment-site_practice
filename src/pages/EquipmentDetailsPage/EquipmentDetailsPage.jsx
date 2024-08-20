@@ -7,6 +7,7 @@ import { Notify } from 'notiflix';
 import { useGetEquipmentByIdQuery } from '../../redux/equipments/equipmentsApi';
 
 import { EquipmentDetailsCard } from 'components/EquipmentDetailsCard/EquipmentDetailsCard';
+import { BackToEquipmentsButton } from 'components/BackToEquipmentsBtn/BackToEquipmentsButton';
 
 import styles from './EquipmentDetails.module.scss';
 const { equipmentDetails } = styles;
@@ -23,6 +24,7 @@ export function EquipmentDetailsPage() {
     return (
         <section className={equipmentDetails}>
             <div className="container">
+                <BackToEquipmentsButton />
                 {isFetching ? (
                     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                         <CircularProgress
