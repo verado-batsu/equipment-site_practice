@@ -79,6 +79,26 @@
 	}
 }
 
+.removeFeatureBtn {
+	display: flex;
+	margin-top: 5px;
+
+	border-radius: 10px;
+
+	transition:
+		color 250ms ease,
+		background-color 250ms ease;
+
+	&:hover,
+	&:focus {
+		color: #fd0c0c;
+		background-color: #bebebe;
+	}
+}
+
+.addFeatureBtn {
+}
+
 .signupFormSubmit {
 	padding: 14px 4px 14px 4px;
 

@@ -1,5 +1,6 @@
 import { Field, Formik, Form, ErrorMessage, FieldArray } from 'formik';
 import * as yup from 'yup';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 import { arrOfCategories } from 'constants';
 
@@ -13,6 +14,8 @@ const {
     signupFormSelect,
     signupFormInputError,
     signupFormError,
+    removeFeatureBtn,
+    addFeatureBtn,
     signupFormSubmit,
     disabled,
 } = styles;
@@ -20,7 +23,10 @@ const {
 const equipmentSchema = yup.object({
     category: yup.string().oneOf(arrOfCategories).required(),
     model: yup.string().required(),
-    features: yup.array().of(yup.string()).required(),
+    features: yup
+        .array()
+        .of(yup.string().required('features is a required field'))
+        .required(),
     photos: yup.array().of(yup.string()).required(),
     describe: yup.string(),
 });
@@ -29,7 +35,7 @@ export function CreateEquipmentForm() {
     const initialValues = {
         category: '',
         model: '',
-        features: [],
+        features: [''],
         photos: [],
         describe: '',
     };
@@ -57,6 +63,7 @@ export function CreateEquipmentForm() {
                 const isError = Object.keys(errors).length !== 0;
                 let isModelError = false;
                 let isFeaturesError = false;
+                console.log(errors);
                 // let isPhotosError = false;
 
                 Object.keys(errors).forEach(errorName => {
@@ -128,7 +135,7 @@ export function CreateEquipmentForm() {
                                             * Features:
                                         </span>
                                         {values.features &&
-                                        values.features.length > 0 ? (
+                                            values.features.length > 0 &&
                                             values.features.map(
                                                 (feature, i) => (
                                                     <div key={i}>
@@ -150,36 +157,30 @@ export function CreateEquipmentForm() {
                                                         />
 
                                                         <button
-                                                            type="button"
-                                                            onClick={() =>
-                                                                arrayHelpers.pop()
+                                                            className={
+                                                                removeFeatureBtn
                                                             }
-                                                        >
-                                                            -
-                                                        </button>
-                                                        <button
                                                             type="button"
-                                                            onClick={() =>
-                                                                arrayHelpers.push(
-                                                                    ''
-                                                                )
-                                                            }
+                                                            onClick={() => {
+                                                                arrayHelpers.remove(
+                                                                    i
+                                                                );
+                                                            }}
                                                         >
-                                                            +
+                                                            <RemoveIcon />
                                                         </button>
                                                     </div>
                                                 )
-                                            )
-                                        ) : (
-                                            <button
-                                                type="button"
-                                                onClick={() =>
-                                                    arrayHelpers.push('')
-                                                }
-                                            >
-                                                Додати характеристику
-                                            </button>
-                                        )}
+                                            )}
+                                        <button
+                                            className={addFeatureBtn}
+                                            type="button"
+                                            onClick={() =>
+                                                arrayHelpers.push('')
+                                            }
+                                        >
+                                            Додати характеристику
+                                        </button>
                                     </label>
                                 )}
                             />
