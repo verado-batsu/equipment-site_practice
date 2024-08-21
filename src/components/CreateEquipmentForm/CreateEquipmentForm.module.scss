@@ -1,6 +1,6 @@
 @import "constants/sizes";
 
-.signupForm {
+.createForm {
 	display: flex;
 	flex-direction: column;
 	padding: 36px 12px;
@@ -19,7 +19,7 @@
 	}
 }
 
-.signupFormLabelsWrapper {
+.createFormLabelsWrapper {
 	margin-bottom: 16px;
 	display: flex;
 	flex-direction: column;
@@ -30,11 +30,11 @@
 	}
 }
 
-.signupFormLabel {
+.createFormLabel {
 	position: relative;
 }
 
-.signupFormTitle {
+.createFormTitle {
 	display: block;
 	margin-bottom: 8px;
 
@@ -48,7 +48,7 @@
 	}
 }
 
-.signupFormInput {
+.createFormInput {
 	width: 100%;
 	padding-right: 30px;
 	padding-bottom: 8px;
@@ -65,11 +65,28 @@
 	}
 }
 
-.signupFormInputError {
+.createFormSelect {
+	width: 100%;
+	padding: 8px;
+
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid #97d28b;
+	color: #828382;
+	font-size: 18px;
+	letter-spacing: -0.72px;
+
+	@media screen and (min-width: $desktop) {
+		font-size: 20px;
+		letter-spacing: -0.8px;
+	}
+}
+
+.createFormInputError {
 	border-color: #d28b8b;
 }
 
-.signupFormError {
+.createFormError {
 	margin-top: 8px;
 	text-align: end;
 	color: #d28b8b;
@@ -79,7 +96,8 @@
 	}
 }
 
-.removeFeatureBtn {
+.removeFeatureBtn,
+.removePhotoBtn {
 	display: flex;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -97,12 +115,14 @@
 	}
 }
 
-.addFeatureBtnWrapper {
+.addFeatureBtnWrapper,
+.addPhotoBtnWrapper {
 	display: flex;
 	justify-content: center;
 }
 
-.addFeatureBtn {
+.addFeatureBtn,
+.addPhotoBtn {
 	padding: 5px 15px;
 
 	border: 1px solid #173d33;
@@ -122,7 +142,7 @@
 	}
 }
 
-.signupFormSubmit {
+.createFormSubmit {
 	padding: 14px 4px 14px 4px;
 
 	border-radius: 500px;
@@ -145,7 +165,7 @@
 	}
 }
 
-.signupFormSubmit.disabled {
+.createFormSubmit.disabled {
 	opacity: 0.5;
 
 	&:hover,

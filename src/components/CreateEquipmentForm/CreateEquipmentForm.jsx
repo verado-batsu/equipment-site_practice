@@ -3,21 +3,25 @@ import * as yup from 'yup';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 import { arrOfCategories } from 'constants';
+import { capitalizeFirstLetter } from 'helpers';
 
 import styles from './CreateEquipmentForm.module.scss';
 const {
-    signupForm,
-    signupFormLabelsWrapper,
-    signupFormLabel,
-    signupFormTitle,
-    signupFormInput,
-    signupFormSelect,
-    signupFormInputError,
-    signupFormError,
+    createForm,
+    createFormLabelsWrapper,
+    createFormLabel,
+    createFormTitle,
+    createFormInput,
+    createFormSelect,
+    createFormInputError,
+    createFormError,
     removeFeatureBtn,
+    removePhotoBtn,
     addFeatureBtnWrapper,
+    addPhotoBtnWrapper,
     addFeatureBtn,
-    signupFormSubmit,
+    addPhotoBtn,
+    createFormSubmit,
     disabled,
 } = styles;
 
@@ -28,7 +32,7 @@ const equipmentSchema = yup.object({
         .array()
         .of(yup.string().required('features is a required field'))
         .required(),
-    photos: yup.array().of(yup.string()).required(),
+    photos: yup.array().of(yup.string().required()).required(),
     describe: yup.string(),
 });
 
@@ -37,7 +41,7 @@ export function CreateEquipmentForm() {
         category: '',
         model: '',
         features: [''],
-        photos: [],
+        photos: [''],
         describe: '',
     };
 
@@ -46,7 +50,7 @@ export function CreateEquipmentForm() {
         // Notify.info(`Form submitted`);
 
         try {
-            // await dispatch(signUp(person));
+            // await dispatch(create(person));
             // navigate('/login', { replace: true });
         } catch (error) {}
 
@@ -62,12 +66,17 @@ export function CreateEquipmentForm() {
         >
             {({ errors, touched, values }) => {
                 const isError = Object.keys(errors).length !== 0;
+                let isCategoryError = false;
                 let isModelError = false;
                 let isFeaturesError = false;
-                // let isPhotosError = false;
+                let isPhotosError = false;
 
                 Object.keys(errors).forEach(errorName => {
                     Object.keys(touched).forEach(touch => {
+                        if (errorName === 'category' && touch === 'category') {
+                            isCategoryError = true;
+                        }
+
                         if (errorName === 'model' && touch === 'model') {
                             isModelError = true;
                         }
@@ -76,53 +85,59 @@ export function CreateEquipmentForm() {
                             isFeaturesError = true;
                         }
 
-                        // if (errorName === 'photos' && touch === 'photos') {
-                        //     isPhotosError = true;
-                        // }
+                        if (errorName === 'photos' && touch === 'photos') {
+                            isPhotosError = true;
+                        }
                     });
                 });
 
                 return (
-                    <Form className={signupForm}>
-                        <div className={signupFormLabelsWrapper}>
-                            <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>
+                    <Form className={createForm}>
+                        <div className={createFormLabelsWrapper}>
+                            <label className={createFormLabel}>
+                                <span className={createFormTitle}>
                                     * Категорія:
                                 </span>
                                 <Field
-                                    className={signupFormSelect}
+                                    className={
+                                        isCategoryError
+                                            ? `${createFormSelect} ${createFormInputError}`
+                                            : createFormSelect
+                                    }
                                     as="select"
                                     name="category"
                                 >
+                                    <option value="" defaultValue>
+                                        None
+                                    </option>
                                     {arrOfCategories.map(category => (
                                         <option key={category} value={category}>
-                                            {category}
+                                            {capitalizeFirstLetter(category)}
                                         </option>
                                     ))}
                                 </Field>
                                 <ErrorMessage
-                                    className={signupFormError}
+                                    className={createFormError}
                                     component="p"
                                     name="category"
                                 />
                             </label>
-                            <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>
+                            <label className={createFormLabel}>
+                                <span className={createFormTitle}>
                                     * Модель:
                                 </span>
                                 <Field
-                                    // className={signupFormInput}
                                     className={
                                         isModelError
-                                            ? `${signupFormInput} ${signupFormInputError}`
-                                            : signupFormInput
+                                            ? `${createFormInput} ${createFormInputError}`
+                                            : createFormInput
                                     }
                                     type="text"
                                     name="model"
                                     placeholder="C410"
                                 />
                                 <ErrorMessage
-                                    className={signupFormError}
+                                    className={createFormError}
                                     component="p"
                                     name="model"
                                 />
@@ -130,8 +145,8 @@ export function CreateEquipmentForm() {
                             <FieldArray
                                 name="features"
                                 render={arrayHelpers => (
-                                    <label className={signupFormLabel}>
-                                        <span className={signupFormTitle}>
+                                    <label className={createFormLabel}>
+                                        <span className={createFormTitle}>
                                             * Характеристики:
                                         </span>
                                         {values.features &&
@@ -142,15 +157,15 @@ export function CreateEquipmentForm() {
                                                         <Field
                                                             className={
                                                                 isFeaturesError
-                                                                    ? `${signupFormInput} ${signupFormInputError}`
-                                                                    : signupFormInput
+                                                                    ? `${createFormInput} ${createFormInputError}`
+                                                                    : createFormInput
                                                             }
                                                             type="text"
                                                             name={`features.${i}`}
                                                         />
                                                         <ErrorMessage
                                                             className={
-                                                                signupFormError
+                                                                createFormError
                                                             }
                                                             component="p"
                                                             name={`features.${i}`}
@@ -186,31 +201,67 @@ export function CreateEquipmentForm() {
                                     </label>
                                 )}
                             />
+                            <FieldArray
+                                name="photos"
+                                render={arrayHelpers => (
+                                    <label className={createFormLabel}>
+                                        <span className={createFormTitle}>
+                                            * Фото:
+                                        </span>
+                                        {values.photos &&
+                                            values.photos.length > 0 &&
+                                            values.photos.map((photo, i) => (
+                                                <div key={i}>
+                                                    <Field
+                                                        className={
+                                                            isPhotosError
+                                                                ? `${createFormInput} ${createFormInputError}`
+                                                                : createFormInput
+                                                        }
+                                                        type="file"
+                                                        name={`photos.${i}`}
+                                                    />
+                                                    <ErrorMessage
+                                                        className={
+                                                            createFormError
+                                                        }
+                                                        component="p"
+                                                        name={`photos.${i}`}
+                                                    />
+                                                    <button
+                                                        className={
+                                                            removePhotoBtn
+                                                        }
+                                                        type="button"
+                                                        onClick={() => {
+                                                            arrayHelpers.remove(
+                                                                i
+                                                            );
+                                                        }}
+                                                    >
+                                                        <RemoveIcon />
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        <div className={addPhotoBtnWrapper}>
+                                            <button
+                                                className={addPhotoBtn}
+                                                type="button"
+                                                onClick={() =>
+                                                    arrayHelpers.push('')
+                                                }
+                                            >
+                                                Додати фото
+                                            </button>
+                                        </div>
+                                    </label>
+                                )}
+                            />
 
-                            {/* <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>
-                                    * Photos:
-                                </span>
+                            <label className={createFormLabel}>
+                                <span className={createFormTitle}>Опис:</span>
                                 <Field
-                                    className={signupFormInput}
-                                    // className={
-                                    //     isTeacherIdError
-                                    //         ? `${signupFormInput} ${signupFormInputError}`
-                                    //         : signupFormInput
-                                    // }
-                                    type="text"
-                                    name="teacherId"
-                                />
-                                <ErrorMessage
-                                    className={signupFormError}
-                                    component="p"
-                                    name="teacherId"
-                                />
-                            </label> */}
-                            <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>Опис:</span>
-                                <Field
-                                    className={signupFormInput}
+                                    className={createFormInput}
                                     type="text"
                                     name="describe"
                                 />
@@ -219,8 +270,8 @@ export function CreateEquipmentForm() {
                         <button
                             className={
                                 isError
-                                    ? `${signupFormSubmit} ${disabled}`
-                                    : signupFormSubmit
+                                    ? `${createFormSubmit} ${disabled}`
+                                    : createFormSubmit
                             }
                             type="submit"
                             disabled={isError}

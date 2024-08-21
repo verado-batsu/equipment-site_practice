@@ -1,5 +1,2 @@
-import { findRightPath } from './findRightPath'
-
-export {
-	findRightPath
-}
+export * from './findRightPath'
+export * from './capitalizeFisrtLetter'
