@@ -15,6 +15,7 @@ const {
     signupFormInputError,
     signupFormError,
     removeFeatureBtn,
+    addFeatureBtnWrapper,
     addFeatureBtn,
     signupFormSubmit,
     disabled,
@@ -63,7 +64,6 @@ export function CreateEquipmentForm() {
                 const isError = Object.keys(errors).length !== 0;
                 let isModelError = false;
                 let isFeaturesError = false;
-                console.log(errors);
                 // let isPhotosError = false;
 
                 Object.keys(errors).forEach(errorName => {
@@ -87,7 +87,7 @@ export function CreateEquipmentForm() {
                         <div className={signupFormLabelsWrapper}>
                             <label className={signupFormLabel}>
                                 <span className={signupFormTitle}>
-                                    * Category:
+                                    * Категорія:
                                 </span>
                                 <Field
                                     className={signupFormSelect}
@@ -108,7 +108,7 @@ export function CreateEquipmentForm() {
                             </label>
                             <label className={signupFormLabel}>
                                 <span className={signupFormTitle}>
-                                    * Model:
+                                    * Модель:
                                 </span>
                                 <Field
                                     // className={signupFormInput}
@@ -132,7 +132,7 @@ export function CreateEquipmentForm() {
                                 render={arrayHelpers => (
                                     <label className={signupFormLabel}>
                                         <span className={signupFormTitle}>
-                                            * Features:
+                                            * Характеристики:
                                         </span>
                                         {values.features &&
                                             values.features.length > 0 &&
@@ -172,15 +172,17 @@ export function CreateEquipmentForm() {
                                                     </div>
                                                 )
                                             )}
-                                        <button
-                                            className={addFeatureBtn}
-                                            type="button"
-                                            onClick={() =>
-                                                arrayHelpers.push('')
-                                            }
-                                        >
-                                            Додати характеристику
-                                        </button>
+                                        <div className={addFeatureBtnWrapper}>
+                                            <button
+                                                className={addFeatureBtn}
+                                                type="button"
+                                                onClick={() =>
+                                                    arrayHelpers.push('')
+                                                }
+                                            >
+                                                Додати характеристику
+                                            </button>
+                                        </div>
                                     </label>
                                 )}
                             />
@@ -206,9 +208,7 @@ export function CreateEquipmentForm() {
                                 />
                             </label> */}
                             <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>
-                                    Describe:
-                                </span>
+                                <span className={signupFormTitle}>Опис:</span>
                                 <Field
                                     className={signupFormInput}
                                     type="text"
@@ -225,7 +225,7 @@ export function CreateEquipmentForm() {
                             type="submit"
                             disabled={isError}
                         >
-                            <span>Create</span>
+                            <span>Створити</span>
                         </button>
                     </Form>
                 );
