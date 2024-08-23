@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Field, Formik, Form, ErrorMessage, FieldArray } from 'formik';
 import * as yup from 'yup';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 import { arrOfCategories } from 'constants';
 import { capitalizeFirstLetter } from 'helpers';
+
+import blank from '../../assets/images/createEquipmentPage/blank.png';
 
 import styles from './CreateEquipmentForm.module.scss';
 const {
@@ -32,16 +35,19 @@ const equipmentSchema = yup.object({
         .array()
         .of(yup.string().required('features is a required field'))
         .required(),
-    photos: yup.array().of(yup.string().required()).required(),
+    // photos: yup.array().of(yup.string().required()).required(),
     describe: yup.string(),
 });
 
 export function CreateEquipmentForm() {
+    const [photos, setPhotos] = useState([]);
+    console.log(photos[0]);
+
     const initialValues = {
         category: '',
         model: '',
         features: [''],
-        photos: [''],
+        // photos: [''],
         describe: '',
     };
 
@@ -55,6 +61,20 @@ export function CreateEquipmentForm() {
         } catch (error) {}
 
         resetForm();
+    }
+
+    function uploadImage(e) {
+        const selectedFile = e.target.files[0];
+        const indexOfSelectedFile = Number(e.target.name.split('.')[1]);
+
+        setPhotos(
+            photos.map((photo, i) => {
+                return photo === '' || indexOfSelectedFile === i
+                    ? selectedFile
+                    : photo;
+            })
+        );
+        // setImagePreview(imagePreviewURL);
     }
 
     return (
@@ -201,7 +221,61 @@ export function CreateEquipmentForm() {
                                     </label>
                                 )}
                             />
-                            <FieldArray
+                            <label className={createFormLabel}>
+                                <span className={createFormTitle}>* Фото:</span>
+                                {photos &&
+                                    photos.length > 0 &&
+                                    photos.map((photo, i) => {
+                                        return (
+                                            <div key={i}>
+                                                <input
+                                                    className={
+                                                        isPhotosError
+                                                            ? `${createFormInput} ${createFormInputError}`
+                                                            : createFormInput
+                                                    }
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={uploadImage}
+                                                    name={`photos.${i}`}
+                                                />
+                                                {/* <ErrorMessage
+														className={
+															createFormError
+														}
+														component="p"
+														name={`photos.${i}`}
+													/> */}
+                                                <button
+                                                    className={removePhotoBtn}
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setPhotos(
+                                                            photos.filter(
+                                                                (_, index) =>
+                                                                    index !== i
+                                                            )
+                                                        );
+                                                    }}
+                                                >
+                                                    <RemoveIcon />
+                                                </button>
+                                            </div>
+                                        );
+                                    })}
+                                <div className={addPhotoBtnWrapper}>
+                                    <button
+                                        className={addPhotoBtn}
+                                        type="button"
+                                        onClick={() =>
+                                            setPhotos(prev => [...prev, ''])
+                                        }
+                                    >
+                                        Додати фото
+                                    </button>
+                                </div>
+                            </label>
+                            {/* <FieldArray
                                 name="photos"
                                 render={arrayHelpers => (
                                     <label className={createFormLabel}>
@@ -219,6 +293,8 @@ export function CreateEquipmentForm() {
                                                                 : createFormInput
                                                         }
                                                         type="file"
+                                                        onChange={uploadImage}
+                                                        // accept="image/*"
                                                         name={`photos.${i}`}
                                                     />
                                                     <ErrorMessage
@@ -256,7 +332,7 @@ export function CreateEquipmentForm() {
                                         </div>
                                     </label>
                                 )}
-                            />
+                            /> */}
 
                             <label className={createFormLabel}>
                                 <span className={createFormTitle}>Опис:</span>
