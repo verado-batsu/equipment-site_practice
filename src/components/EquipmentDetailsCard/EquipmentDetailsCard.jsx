@@ -7,7 +7,6 @@ import { EquipmentSlider } from 'components/EquipmentSlider/EquipmentSlider';
 const {
     detailsWrapper,
     equipmentFeatures,
-    equipmentHeader,
     equipmentFeaturesList,
     equipmentFeaturesItem,
     equipmentDescr,
@@ -38,8 +37,8 @@ export function EquipmentDetailsCard({ equipment }) {
                     </Typography>
                     <Typography variant="h6">Характеристики:</Typography>
                     <ul className={equipmentFeaturesList}>
-                        {equipment?.features.map(feature => (
-                            <li key={feature} className={equipmentFeaturesItem}>
+                        {equipment?.features.map((feature, i) => (
+                            <li key={i} className={equipmentFeaturesItem}>
                                 <Typography
                                     variant="body2"
                                     style={{ whiteSpace: 'pre-wrap' }}

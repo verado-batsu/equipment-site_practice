@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Field, Formik, Form, ErrorMessage, FieldArray } from 'formik';
 import * as yup from 'yup';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { Notify } from 'notiflix';
 
 import { arrOfCategories } from 'constants';
 import { capitalizeFirstLetter } from 'helpers';
-
-import blank from '../../assets/images/createEquipmentPage/blank.png';
+import { useAddEquipmentMutation } from '../../redux/equipments/equipmentsApi';
 
 import styles from './CreateEquipmentForm.module.scss';
 const {
@@ -35,29 +36,52 @@ const equipmentSchema = yup.object({
         .array()
         .of(yup.string().required('features is a required field'))
         .required(),
-    // photos: yup.array().of(yup.string().required()).required(),
     describe: yup.string(),
 });
 
 export function CreateEquipmentForm() {
+    const navigate = useNavigate();
     const [photos, setPhotos] = useState([]);
-    console.log(photos[0]);
+    const [photoError, setPhotoError] = useState(false);
+
+    useEffect(() => {
+        setPhotoError(
+            photos.some(photo => photo === '' || photo === undefined)
+        );
+    }, [photos]);
+
+    const [addEquipment, { error }] = useAddEquipmentMutation();
+
+    error && Notify.failure(error.data.message);
 
     const initialValues = {
         category: '',
         model: '',
         features: [''],
-        // photos: [''],
         describe: '',
     };
 
-    async function handleSubmit(equipment, { resetForm }) {
-        console.log(equipment);
-        // Notify.info(`Form submitted`);
+    async function handleSubmit(values, { resetForm }) {
+        Notify.info(`Form submitted`);
+        const formData = new FormData();
+
+        photos.forEach(photo => {
+            formData.append('photos[]', photo);
+        });
+
+        for (const key in values) {
+            if (key === 'features') {
+                values[key].forEach(item => {
+                    formData.append(`features[]`, item);
+                });
+            } else {
+                formData.append(key, values[key]);
+            }
+        }
 
         try {
-            // await dispatch(create(person));
-            // navigate('/login', { replace: true });
+            const response = await addEquipment(formData);
+            navigate(`/equipments/${response.data._id}`, { replace: true });
         } catch (error) {}
 
         resetForm();
@@ -74,7 +98,6 @@ export function CreateEquipmentForm() {
                     : photo;
             })
         );
-        // setImagePreview(imagePreviewURL);
     }
 
     return (
@@ -89,7 +112,6 @@ export function CreateEquipmentForm() {
                 let isCategoryError = false;
                 let isModelError = false;
                 let isFeaturesError = false;
-                let isPhotosError = false;
 
                 Object.keys(errors).forEach(errorName => {
                     Object.keys(touched).forEach(touch => {
@@ -103,10 +125,6 @@ export function CreateEquipmentForm() {
 
                         if (errorName === 'features' && touch === 'features') {
                             isFeaturesError = true;
-                        }
-
-                        if (errorName === 'photos' && touch === 'photos') {
-                            isPhotosError = true;
                         }
                     });
                 });
@@ -230,7 +248,7 @@ export function CreateEquipmentForm() {
                                             <div key={i}>
                                                 <input
                                                     className={
-                                                        isPhotosError
+                                                        photoError
                                                             ? `${createFormInput} ${createFormInputError}`
                                                             : createFormInput
                                                     }
@@ -239,13 +257,18 @@ export function CreateEquipmentForm() {
                                                     onChange={uploadImage}
                                                     name={`photos.${i}`}
                                                 />
-                                                {/* <ErrorMessage
-														className={
-															createFormError
-														}
-														component="p"
-														name={`photos.${i}`}
-													/> */}
+                                                {photoError && (
+                                                    <p
+                                                        className={
+                                                            createFormError
+                                                        }
+                                                        name={`photos.${i}`}
+                                                    >
+                                                        Photos is a required
+                                                        field
+                                                    </p>
+                                                )}
+
                                                 <button
                                                     className={removePhotoBtn}
                                                     type="button"
@@ -275,65 +298,6 @@ export function CreateEquipmentForm() {
                                     </button>
                                 </div>
                             </label>
-                            {/* <FieldArray
-                                name="photos"
-                                render={arrayHelpers => (
-                                    <label className={createFormLabel}>
-                                        <span className={createFormTitle}>
-                                            * Фото:
-                                        </span>
-                                        {values.photos &&
-                                            values.photos.length > 0 &&
-                                            values.photos.map((photo, i) => (
-                                                <div key={i}>
-                                                    <Field
-                                                        className={
-                                                            isPhotosError
-                                                                ? `${createFormInput} ${createFormInputError}`
-                                                                : createFormInput
-                                                        }
-                                                        type="file"
-                                                        onChange={uploadImage}
-                                                        // accept="image/*"
-                                                        name={`photos.${i}`}
-                                                    />
-                                                    <ErrorMessage
-                                                        className={
-                                                            createFormError
-                                                        }
-                                                        component="p"
-                                                        name={`photos.${i}`}
-                                                    />
-                                                    <button
-                                                        className={
-                                                            removePhotoBtn
-                                                        }
-                                                        type="button"
-                                                        onClick={() => {
-                                                            arrayHelpers.remove(
-                                                                i
-                                                            );
-                                                        }}
-                                                    >
-                                                        <RemoveIcon />
-                                                    </button>
-                                                </div>
-                                            ))}
-                                        <div className={addPhotoBtnWrapper}>
-                                            <button
-                                                className={addPhotoBtn}
-                                                type="button"
-                                                onClick={() =>
-                                                    arrayHelpers.push('')
-                                                }
-                                            >
-                                                Додати фото
-                                            </button>
-                                        </div>
-                                    </label>
-                                )}
-                            /> */}
-
                             <label className={createFormLabel}>
                                 <span className={createFormTitle}>Опис:</span>
                                 <Field
@@ -345,7 +309,7 @@ export function CreateEquipmentForm() {
                         </div>
                         <button
                             className={
-                                isError
+                                isError || photoError
                                     ? `${createFormSubmit} ${disabled}`
                                     : createFormSubmit
                             }
