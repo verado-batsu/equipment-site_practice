@@ -81,6 +81,7 @@ export function CreateEquipmentForm() {
 
         try {
             const response = await addEquipment(formData);
+            Notify.success(`Equipment created`);
             navigate(`/equipments/${response.data._id}`, { replace: true });
         } catch (error) {}
 
