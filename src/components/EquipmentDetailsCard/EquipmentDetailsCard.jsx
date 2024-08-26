@@ -11,7 +11,6 @@ import styles from './EquipmentDetailsCard.module.scss';
 const {
     detailsWrapper,
     equipmentFeatures,
-    equipmentFeaturesContent,
     equipmentFeaturesList,
     equipmentFeaturesItem,
     equipmentDescr,
@@ -24,8 +23,8 @@ export function EquipmentDetailsCard({ equipment }) {
         <div className={detailsWrapper}>
             <EquipmentSlider imagesData={equipment.photos} />
             <Card className={equipmentFeatures}>
-                {isLoggedIn && <ToEditFormButton />}
-                <CardContent className={equipmentFeaturesContent}>
+                {isLoggedIn && <ToEditFormButton equipment={equipment} />}
+                <CardContent>
                     <Typography
                         variant="h5"
                         sx={{

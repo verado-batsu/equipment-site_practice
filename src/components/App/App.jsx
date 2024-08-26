@@ -33,7 +33,14 @@ function App() {
                     path="/equipments/:equipmentId"
                     element={<EquipmentDetailsPage />}
                 />
-                <Route path="/create" element={<CreateEquipmentPage />} />
+                <Route
+                    path="/create"
+                    element={<CreateEquipmentPage type="create" />}
+                />
+                <Route
+                    path="/edit"
+                    element={<CreateEquipmentPage type="edit" />}
+                />
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/login" element={<LogInPage />} />
                 <Route path="*" element={<NotFound />} />

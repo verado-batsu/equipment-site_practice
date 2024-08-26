@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Field, Formik, Form, ErrorMessage, FieldArray } from 'formik';
 import * as yup from 'yup';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -7,7 +7,11 @@ import { Notify } from 'notiflix';
 
 import { arrOfCategories } from 'constants';
 import { capitalizeFirstLetter } from 'helpers';
-import { useAddEquipmentMutation } from '../../redux/equipments/equipmentsApi';
+import {
+    useAddEquipmentMutation,
+    useGetEquipmentByIdQuery,
+    useUpdateEquipmentByIdMutation,
+} from '../../redux/equipments/equipmentsApi';
 
 import styles from './CreateEquipmentForm.module.scss';
 const {
@@ -39,10 +43,25 @@ const equipmentSchema = yup.object({
     describe: yup.string(),
 });
 
-export function CreateEquipmentForm() {
+export function CreateEquipmentForm({ type }) {
     const navigate = useNavigate();
-    const [photos, setPhotos] = useState([]);
+
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get('equipmentId');
+    const { data: equipment, error: getEquipmentError } =
+        useGetEquipmentByIdQuery(id, { skip: type === 'create' && true });
+    getEquipmentError && Notify.failure(getEquipmentError.data.message);
+
+    const [photos, setPhotos] = useState(['']);
     const [photoError, setPhotoError] = useState(false);
+
+    const [addEquipment, { error: addEquipmentError }] =
+        useAddEquipmentMutation();
+    const [editEquipment, { error: editEquipmentError }] =
+        useUpdateEquipmentByIdMutation();
+
+    addEquipmentError && Notify.failure(addEquipmentError.data.message);
+    editEquipmentError && Notify.failure(editEquipmentError.data.message);
 
     useEffect(() => {
         setPhotoError(
@@ -50,15 +69,11 @@ export function CreateEquipmentForm() {
         );
     }, [photos]);
 
-    const [addEquipment, { error }] = useAddEquipmentMutation();
-
-    error && Notify.failure(error.data.message);
-
     const initialValues = {
-        category: '',
-        model: '',
-        features: [''],
-        describe: '',
+        category: type === 'edit' ? equipment.category : '',
+        model: type === 'edit' ? equipment.model : '',
+        features: type === 'edit' ? equipment.features : [''],
+        describe: type === 'edit' ? equipment.describe : '',
     };
 
     async function handleSubmit(values, { resetForm }) {
@@ -80,7 +95,10 @@ export function CreateEquipmentForm() {
         }
 
         try {
-            const response = await addEquipment(formData);
+            const response =
+                type === 'create'
+                    ? await addEquipment(formData)
+                    : await editEquipment({ id, data: formData });
             Notify.success(`Equipment created`);
             navigate(`/equipments/${response.data._id}`, { replace: true });
         } catch (error) {}
@@ -317,7 +335,9 @@ export function CreateEquipmentForm() {
                             type="submit"
                             disabled={isError}
                         >
-                            <span>Створити</span>
+                            <span>
+                                {type === 'edit' ? 'Змінити' : 'Створити'}
+                            </span>
                         </button>
                     </Form>
                 );

@@ -39,11 +39,12 @@ export const equipmentsApi = createApi({
 			providesTags: ['Equipments'],
 		}),
 		addEquipment: builder.mutation({
-			query: (data) => ({
+			query: (data) => {
+				return {
 				url: `/equipments`,
 				method: 'POST',
 				data,
-			}),
+			}},
 			invalidatesTags: ['Equipments'],
 		}),
 		deleteEquipment: builder.mutation({
@@ -56,7 +57,7 @@ export const equipmentsApi = createApi({
 			invalidatesTags: ['Equipments'],
 		}),
 		updateEquipmentById: builder.mutation({
-			query: (id, data) => {
+			query: ({ id, data }) => {
 				return {
 					url: `/equipments/${id}`,
 					method: 'PUT',

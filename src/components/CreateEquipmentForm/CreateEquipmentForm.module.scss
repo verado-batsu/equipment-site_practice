@@ -3,13 +3,13 @@
 .createForm {
 	display: flex;
 	flex-direction: column;
-	padding: 36px 12px;
+	padding: 36px 22px;
 
 	background-color: #eaedf1;
 	border-radius: 20px;
 
 	@media screen and (min-width: $tablet) {
-		width: 342px;
+		width: 480px;
 		padding: 36px 24px;
 	}
 
@@ -21,9 +21,6 @@
 
 .createFormLabelsWrapper {
 	margin-bottom: 16px;
-	display: flex;
-	flex-direction: column;
-	gap: 28px;
 
 	@media screen and (min-width: $desktop) {
 		margin-bottom: 32px;
@@ -31,7 +28,13 @@
 }
 
 .createFormLabel {
+	display: inline-block;
+	width: 100%;
 	position: relative;
+
+	&:not(:last-child) {
+		margin-bottom: 28px;
+	}
 }
 
 .createFormTitle {
@@ -75,6 +78,8 @@
 	color: #828382;
 	font-size: 18px;
 	letter-spacing: -0.72px;
+
+	cursor: pointer;
 
 	@media screen and (min-width: $desktop) {
 		font-size: 20px;
