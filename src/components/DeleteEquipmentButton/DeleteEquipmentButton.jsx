@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useDeleteEquipmentMutation } from '../../redux/equipments/equipmentsApi';
 
-import styles from './DeleteEquipmentBtn.module.scss';
+import styles from './DeleteEquipmentButton.module.scss';
 const { deleteBtn } = styles;
 
 export function DeleteEquipmentButton({ equipmentId }) {

@@ -8,8 +8,8 @@ import { Notify } from 'notiflix';
 import { useGetEquipmentByIdQuery } from '../../redux/equipments/equipmentsApi';
 
 import { EquipmentDetailsCard } from 'components/EquipmentDetailsCard/EquipmentDetailsCard';
-import { BackToEquipmentsButton } from 'components/BackToEquipmentsBtn/BackToEquipmentsButton';
-import { DeleteEquipmentButton } from 'components/DeleteEquipmentBtn/DeleteEquipmentBtn';
+import { BackToEquipmentsButton } from 'components/BackToEquipmentsButton/BackToEquipmentsButton';
+import { DeleteEquipmentButton } from 'components/DeleteEquipmentButton/DeleteEquipmentButton';
 
 import styles from './EquipmentDetails.module.scss';
 const { equipmentDetailsSection, btnWrapper } = styles;

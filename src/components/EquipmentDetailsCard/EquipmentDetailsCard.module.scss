@@ -22,6 +22,8 @@
 }
 
 .equipmentFeatures {
+	position: relative;
+
 	@media screen and (min-width: $tablet) {
 		grid-row-start: 1;
 		grid-row-end: 3;
@@ -33,6 +35,10 @@
 		grid-row-end: 2;
 		grid-column-start: 2;
 	}
+}
+
+.equipmentFeaturesContent {
+	// padding-top: 28px;
 }
 
 .equipmentDescr {
