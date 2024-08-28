@@ -27,7 +27,8 @@ export const equipmentsApi = createApi({
 	tagTypes: ['Equipments'],
 	endpoints: (builder) => ({
 		getEquipments: builder.query({
-			query: (params = '') => ({ url: `/equipments?${params}` }),
+			query: ({categoryParam = '',
+        queryParam = '',}) => ({ url: `/equipments?category=${categoryParam}&q=${queryParam}` }),
 			providesTags: ['Equipments'],
 		}),
 		getEquipmentById: builder.query({
@@ -66,13 +67,6 @@ export const equipmentsApi = createApi({
 			},
 			invalidatesTags: ['Equipments'],
 		}),
-		// fetchCurrentUser: builder.mutation({
-		// 	query: () => ({
-		// 		url: '/users/current',
-		// 		method: 'GET'
-		// 	}),
-		// 	invalidatesTags: ['Contacts'],
-		// }),
 	}),
 })
 

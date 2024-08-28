@@ -9,30 +9,44 @@ import { FilterBar } from 'components/FilterBar/FilterBar';
 import { EquipmentList } from 'components/EquipmentList/EquipmentList';
 
 import styles from './EquipmentsPage.module.scss';
+import { SearchForm } from 'components/SearchForm/SearchForm';
 const { equipmentsSection } = styles;
 
 export function EquipmentsPage() {
-    const [params, setParams] = useState('');
+    const [categoryParam, setCategoryParam] = useState('');
+    const [queryParam, setQueryParam] = useState('');
     const [category, setCategory] = useState('all');
 
-    const { data, isFetching, error } = useGetEquipmentsQuery(params);
+    const { data, isFetching, error } = useGetEquipmentsQuery({
+        categoryParam,
+        queryParam,
+    });
 
     function handleEquipmentFilter(e) {
         const category = e.target.textContent.toLowerCase();
 
         if (category === 'all') {
-            setParams('');
+            setCategoryParam('');
             setCategory('all');
             return;
         }
 
-        setParams(`category=${category}`);
+        setCategoryParam(category);
         setCategory(category);
+    }
+
+    function handleSearchSubmit(e) {
+        e.preventDefault();
+
+        const searchedModel = e.target.model.value;
+
+        setQueryParam(searchedModel);
     }
 
     return (
         <section className={equipmentsSection}>
             <div className="container">
+                <SearchForm handleSearchSubmit={handleSearchSubmit} />
                 <FilterBar
                     handleEquipmentFilter={handleEquipmentFilter}
                     currentCategory={category}

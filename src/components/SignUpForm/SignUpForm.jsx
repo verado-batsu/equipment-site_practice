@@ -64,7 +64,6 @@ export function SignUpForm() {
 
     return (
         <Formik
-            autoComplete="off"
             onSubmit={handleSubmit}
             initialValues={initialValues}
             validationSchema={userSchema}
