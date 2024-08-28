@@ -6,7 +6,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { Notify } from 'notiflix';
 
 import { arrOfCategories } from 'constants';
-import { capitalizeFirstLetter } from 'helpers';
+import { capitalizeFirstLetter, urlToFile } from 'helpers';
 import {
     useAddEquipmentMutation,
     useGetEquipmentByIdQuery,
@@ -21,6 +21,7 @@ const {
     createFormTitle,
     createFormInput,
     createFormSelect,
+    createFormPhotoPreviewWrapper,
     createFormInputError,
     createFormError,
     removeFeatureBtn,
@@ -48,8 +49,10 @@ export function CreateEquipmentForm({ type }) {
 
     const [searchParams] = useSearchParams();
     const id = searchParams.get('equipmentId');
-    const { data: equipment, error: getEquipmentError } =
+
+    const { data: equipmentForEdit, error: getEquipmentError } =
         useGetEquipmentByIdQuery(id, { skip: type === 'create' && true });
+
     getEquipmentError && Notify.failure(getEquipmentError.data.message);
 
     const [photos, setPhotos] = useState(['']);
@@ -69,11 +72,30 @@ export function CreateEquipmentForm({ type }) {
         );
     }, [photos]);
 
+    useEffect(() => {
+        if (type !== 'edit') {
+            return;
+        }
+
+        async function filePhotos() {
+            const result = await Promise.all(
+                equipmentForEdit.photos.map(async ({ url, title }) => {
+                    const file = await urlToFile(url, title, 'image/jpeg');
+
+                    return file;
+                })
+            );
+            setPhotos(result);
+        }
+
+        filePhotos();
+    }, [equipmentForEdit?.photos, type]);
+
     const initialValues = {
-        category: type === 'edit' ? equipment.category : '',
-        model: type === 'edit' ? equipment.model : '',
-        features: type === 'edit' ? equipment.features : [''],
-        describe: type === 'edit' ? equipment.describe : '',
+        category: type === 'edit' ? equipmentForEdit.category : '',
+        model: type === 'edit' ? equipmentForEdit.model : '',
+        features: type === 'edit' ? equipmentForEdit.features : [''],
+        describe: type === 'edit' ? equipmentForEdit.describe : '',
     };
 
     async function handleSubmit(values, { resetForm }) {
@@ -263,6 +285,8 @@ export function CreateEquipmentForm({ type }) {
                                 {photos &&
                                     photos.length > 0 &&
                                     photos.map((photo, i) => {
+                                        const imagePreviewURL =
+                                            photo && URL.createObjectURL(photo);
                                         return (
                                             <div key={i}>
                                                 <input
@@ -276,6 +300,17 @@ export function CreateEquipmentForm({ type }) {
                                                     onChange={uploadImage}
                                                     name={`photos.${i}`}
                                                 />
+                                                <div
+                                                    className={
+                                                        createFormPhotoPreviewWrapper
+                                                    }
+                                                >
+                                                    <img
+                                                        src={imagePreviewURL}
+                                                        alt={photo.name}
+                                                    />
+                                                </div>
+
                                                 {photoError && (
                                                     <p
                                                         className={

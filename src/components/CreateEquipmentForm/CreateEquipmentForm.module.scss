@@ -87,6 +87,11 @@
 	}
 }
 
+.createFormPhotoPreviewWrapper {
+	display: flex;
+	justify-content: center;
+}
+
 .createFormInputError {
 	border-color: #d28b8b;
 }
