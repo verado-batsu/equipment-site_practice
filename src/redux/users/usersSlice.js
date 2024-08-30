@@ -28,9 +28,16 @@ export const usersSlice = createSlice({
 				state.token = null;
 				state.isLoggedIn = false;
 			})
+			.addCase(getCurrentUser.pending, (state) => {
+				state.isFetchingCurrent = true;
+			})
 			.addCase(getCurrentUser.fulfilled, (state, { payload }) => {
 				state.user = payload;
 				state.isLoggedIn = true;
+				state.isFetchingCurrent = false;
+			})
+			.addCase(getCurrentUser.rejected, (state) => {
+				state.isFetchingCurrent = false;
 			})
 	},
 })
