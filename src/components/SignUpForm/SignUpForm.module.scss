@@ -19,6 +19,18 @@
 	}
 }
 
+.signUpFormTitle {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
+
+	color: #173d33;
+	text-align: justify;
+	font-size: 32px;
+	font-weight: bold;
+	letter-spacing: -0.64px;
+}
+
 .signupFormLabelsWrapper {
 	margin-bottom: 16px;
 	display: flex;

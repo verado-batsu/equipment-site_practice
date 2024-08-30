@@ -24,20 +24,26 @@ export function Navigation() {
     return (
         <nav className={navigation}>
             <ul className={navList}>
-                {arrOfHeaderSection.map(title => (
-                    <li key={title} className={navItem}>
-                        <NavLink
-                            className={({ isActive }) =>
-                                [navLink, isActive ? navLinkActive : ''].join(
-                                    ' '
-                                )
-                            }
-                            to={findRightPath(title)}
-                        >
-                            {title}
-                        </NavLink>
-                    </li>
-                ))}
+                {arrOfHeaderSection.map(title => {
+                    if (title === 'Create Equipment' && !isLoggedIn) {
+                        return '';
+                    }
+                    return (
+                        <li key={title} className={navItem}>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    [
+                                        navLink,
+                                        isActive ? navLinkActive : '',
+                                    ].join(' ')
+                                }
+                                to={findRightPath(title)}
+                            >
+                                {title}
+                            </NavLink>
+                        </li>
+                    );
+                })}
             </ul>
             {isLoggedIn ? (
                 <UserMenu />

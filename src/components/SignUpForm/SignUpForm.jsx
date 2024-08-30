@@ -13,9 +13,10 @@ import { signUp } from '../../redux/users/usersOperations';
 import styles from './SignUpForm.module.scss';
 const {
     signupForm,
+    signUpFormTitle,
     signupFormLabelsWrapper,
     signupFormLabel,
-    signupFormTitle,
+    signupFormLabelTitle,
     signupFormInput,
     signupFormInputError,
     signupFormError,
@@ -100,9 +101,10 @@ export function SignUpForm() {
 
                 return (
                     <Form className={signupForm}>
+                        <h2 className={signUpFormTitle}>SignUp</h2>
                         <div className={signupFormLabelsWrapper}>
                             <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>* Name:</span>
+                                <span className={signupFormLabelTitle}>* Name:</span>
                                 <Field
                                     className={
                                         isNameError
@@ -120,7 +122,7 @@ export function SignUpForm() {
                                 />
                             </label>
                             <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>
+                                <span className={signupFormLabelTitle}>
                                     * E-mail:
                                 </span>
                                 <Field
@@ -140,7 +142,7 @@ export function SignUpForm() {
                                 />
                             </label>
                             <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>
+                                <span className={signupFormLabelTitle}>
                                     * Password:
                                 </span>
                                 <Field
@@ -174,7 +176,7 @@ export function SignUpForm() {
                                 />
                             </label>
                             <label className={signupFormLabel}>
-                                <span className={signupFormTitle}>
+                                <span className={signupFormLabelTitle}>
                                     * Teacher Id:
                                 </span>
                                 <Field

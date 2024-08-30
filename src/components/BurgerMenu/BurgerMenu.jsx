@@ -107,6 +107,12 @@ export function BurgerMenu() {
                         </button>
                         <ul className={menuList}>
                             {arrOfHeaderSection.map(title => {
+                                if (
+                                    title === 'Create Equipment' &&
+                                    !isLoggedIn
+                                ) {
+                                    return '';
+                                }
                                 return (
                                     <li key={title} className={menuItem}>
                                         <NavLink

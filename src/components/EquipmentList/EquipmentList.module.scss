@@ -19,6 +19,7 @@
 }
 
 .equipmentItem {
+	display: flex;
 }
 
 .equipmentLink {
@@ -30,5 +31,8 @@
 }
 
 .equipmentCardContent {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
 	padding: 16px;
 }

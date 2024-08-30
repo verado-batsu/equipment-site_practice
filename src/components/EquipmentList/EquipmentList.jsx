@@ -24,7 +24,12 @@ export function EquipmentList({ equipments }) {
                                 to={`${equipment._id}`}
                                 className={equipmentLink}
                             >
-                                <Card sx={{ maxWidth: 345 }}>
+                                <Card
+                                    sx={{
+                                        height: '100%',
+                                        maxWidth: 345,
+                                    }}
+                                >
                                     <CardMedia
                                         component="img"
                                         alt={equipment.model}
@@ -43,6 +48,9 @@ export function EquipmentList({ equipments }) {
                                             gutterBottom
                                             variant="subtitle2"
                                             component="div"
+                                            sx={{
+                                                flexGrow: '1',
+                                            }}
                                         >
                                             Останні зміни додав{' '}
                                             {equipment.owner.name}

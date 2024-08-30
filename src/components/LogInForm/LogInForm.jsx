@@ -13,9 +13,10 @@ import { logIn } from '../../redux/users/usersOperations';
 import styles from './LogInForm.module.scss';
 const {
     loginForm,
+    loginFormTitle,
     loginFormLabelsWrapper,
     loginFormLabel,
-    loginFormTitle,
+    loginFormLabelTitle,
     loginFormInput,
     loginFormInputError,
     loginFormError,
@@ -84,9 +85,10 @@ export function LogInForm() {
 
                 return (
                     <Form className={loginForm}>
+                        <h2 className={loginFormTitle}>LogIn</h2>
                         <div className={loginFormLabelsWrapper}>
                             <label className={loginFormLabel}>
-                                <span className={loginFormTitle}>
+                                <span className={loginFormLabelTitle}>
                                     * E-mail:
                                 </span>
                                 <Field
@@ -106,7 +108,7 @@ export function LogInForm() {
                                 />
                             </label>
                             <label className={loginFormLabel}>
-                                <span className={loginFormTitle}>
+                                <span className={loginFormLabelTitle}>
                                     * Password:
                                 </span>
                                 <Field

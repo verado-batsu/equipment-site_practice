@@ -12,10 +12,12 @@ import {
     LogInPage,
     NotFound,
 } from '../../pages';
+import { PrivateRoute } from 'components/PrivateRoute';
 
 import { getCurrentUser } from '../../redux/users/usersOperations';
 
 import './App.scss';
+import { RestrictedRoute } from 'components/RestrictedRoute';
 
 function App() {
     const dispatch = useDispatch();
@@ -35,14 +37,40 @@ function App() {
                 />
                 <Route
                     path="/create"
-                    element={<CreateEquipmentPage type="create" />}
+                    element={
+                        <PrivateRoute
+                            redirectTo="/login"
+                            component={<CreateEquipmentPage type="create" />}
+                        />
+                    }
                 />
                 <Route
                     path="/edit"
-                    element={<CreateEquipmentPage type="edit" />}
+                    element={
+                        <PrivateRoute
+                            redirectTo="/login"
+                            component={<CreateEquipmentPage type="edit" />}
+                        />
+                    }
                 />
-                <Route path="/signup" element={<SignUpPage />} />
-                <Route path="/login" element={<LogInPage />} />
+                <Route
+                    path="/signup"
+                    element={
+                        <RestrictedRoute
+                            redirectTo="/equipments"
+                            component={<SignUpPage />}
+                        />
+                    }
+                />
+                <Route
+                    path="/login"
+                    element={
+                        <RestrictedRoute
+                            redirectTo="/equipments"
+                            component={<LogInPage />}
+                        />
+                    }
+                />
                 <Route path="*" element={<NotFound />} />
             </Route>
         </Routes>
