@@ -1,3 +1,3 @@
 export * from './findRightPath'
-export * from './capitalizeFisrtLetter'
+export * from './capitalizeFirstLetter'
 export * from './urlToFile'

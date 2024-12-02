@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Notify } from "notiflix";
+import { toast } from "react-toastify";
 
 axios.defaults.baseURL = 'https://equipment-site-backend.onrender.com/api';
 
@@ -27,7 +27,7 @@ export const logIn = createAsyncThunk('auth/logIn', async (user, thunkAPI) => {
 		token.set(data.token)
 		return data
 	} catch (error) {
-		Notify.failure("Something went wrong. Сheck that the entered email and password are correct");
+		toast.error("Something went wrong. Сheck that the entered email and password are correct");
 	}
 })
 

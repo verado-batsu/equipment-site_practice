@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Field, Formik, Form, ErrorMessage, FieldArray } from 'formik';
 import * as yup from 'yup';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { Notify } from 'notiflix';
+import { toast } from 'react-toastify';
 
 import { arrOfCategories } from 'constants';
 import { capitalizeFirstLetter, urlToFile } from 'helpers';
@@ -53,7 +53,7 @@ export function CreateEquipmentForm({ type }) {
     const { data: equipmentForEdit, error: getEquipmentError } =
         useGetEquipmentByIdQuery(id, { skip: type === 'create' && true });
 
-    getEquipmentError && Notify.failure(getEquipmentError.data.message);
+    getEquipmentError && toast.error(getEquipmentError.data.message);
 
     const [photos, setPhotos] = useState(['']);
     const [photoError, setPhotoError] = useState(false);
@@ -63,8 +63,8 @@ export function CreateEquipmentForm({ type }) {
     const [editEquipment, { error: editEquipmentError }] =
         useUpdateEquipmentByIdMutation();
 
-    addEquipmentError && Notify.failure(addEquipmentError.data.message);
-    editEquipmentError && Notify.failure(editEquipmentError.data.message);
+    addEquipmentError && toast.error(addEquipmentError.data.message);
+    editEquipmentError && toast.error(editEquipmentError.data.message);
 
     useEffect(() => {
         setPhotoError(
@@ -99,7 +99,7 @@ export function CreateEquipmentForm({ type }) {
     };
 
     async function handleSubmit(values, { resetForm }) {
-        Notify.info(`Form submitted`);
+        toast.info(`Form submitted`);
         const formData = new FormData();
 
         photos.forEach(photo => {
@@ -121,7 +121,7 @@ export function CreateEquipmentForm({ type }) {
                 type === 'create'
                     ? await addEquipment(formData)
                     : await editEquipment({ id, data: formData });
-            Notify.success(`Equipment created`);
+            toast.success(`Equipment created`);
             navigate(`/equipments/${response.data._id}`, { replace: true });
         } catch (error) {}
 

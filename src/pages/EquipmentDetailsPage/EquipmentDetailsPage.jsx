@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Notify } from 'notiflix';
+import { toast } from 'react-toastify';
 
 import { useGetEquipmentByIdQuery } from '../../redux/equipments/equipmentsApi';
 
@@ -45,7 +45,7 @@ export function EquipmentDetailsPage() {
                     <EquipmentDetailsCard equipment={equipment} />
                 )}
             </div>
-            {error && Notify.failure(error)}
+            {error && toast.error(error)}
         </section>
     );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-import { Notify } from 'notiflix';
+import { toast } from 'react-toastify';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
@@ -95,7 +95,7 @@ export function EquipmentsPage() {
                     />
                 )}
             </div>
-            {error && Notify.failure(error)}
+            {error && toast.error(error)}
         </section>
     );
 }

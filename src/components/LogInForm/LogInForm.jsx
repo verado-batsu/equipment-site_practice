@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { toast } from 'react-toastify';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -45,7 +45,7 @@ export function LogInForm() {
     };
 
     async function handleSubmit(person, { resetForm }) {
-        Notify.info(`Form submitted`);
+        toast.info(`Form submitted`);
 
         try {
             await dispatch(logIn(person));

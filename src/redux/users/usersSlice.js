@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Notify } from 'notiflix'
+import { toast } from 'react-toastify'
 import { getCurrentUser, logIn, logOut, signUp } from './usersOperations'
 
 const initialState = {
@@ -15,13 +15,13 @@ export const usersSlice = createSlice({
 	extraReducers: builder => {
 		builder
 			.addCase(signUp.fulfilled, () => {
-				Notify.success(`User registered. Please login`);
+				toast.success(`User registered. Please login`);
 			})
 			.addCase(logIn.fulfilled, (state, { payload }) => {
 				state.user = payload.user;
 				state.token = payload.token;
 				state.isLoggedIn = true;
-				Notify.success(`Welcome ${state.user.name}`);
+				toast.success(`Welcome ${state.user.name}`);
 			})
 			.addCase(logOut.fulfilled, (state, _) => {
 				state.user = { name: null, email: null };

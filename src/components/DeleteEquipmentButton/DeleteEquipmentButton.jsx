@@ -1,4 +1,4 @@
-import { Notify } from 'notiflix';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 import { useDeleteEquipmentMutation } from '../../redux/equipments/equipmentsApi';
@@ -10,12 +10,12 @@ export function DeleteEquipmentButton({ equipmentId }) {
     const navigate = useNavigate();
     const [deleteEquipment, { error }] = useDeleteEquipmentMutation();
 
-    error && Notify.failure(error.data.message);
+    error && toast.error(error.data.message);
 
     async function handleClick() {
         try {
             await deleteEquipment(equipmentId);
-            Notify.success('Equipment deleted success');
+            toast.success('Equipment deleted success');
             navigate(`/equipments`, { replace: true });
         } catch (error) {}
     }
