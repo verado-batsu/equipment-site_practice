@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { toast } from 'react-toastify';
 
-import { arrOfCategories } from 'constants';
+import { arrOfCategories, arrOfTypes } from 'constants';
 import { capitalizeFirstLetter, urlToFile } from 'helpers';
 import {
     useAddEquipmentMutation,
@@ -18,9 +18,14 @@ const {
     createForm,
     createFormLabelsWrapper,
     createFormLabel,
+    createFormRadioGroup,
+    createFormRadioLabel,
+    createFormRadioValueLabel,
     createFormTitle,
+    createFormRadioTitle,
     createFormInput,
     createFormSelect,
+    createFormRadio,
     createFormPhotoPreviewWrapper,
     createFormInputError,
     createFormError,
@@ -36,7 +41,10 @@ const {
 
 const equipmentSchema = yup.object({
     category: yup.string().oneOf(arrOfCategories).required(),
+    typeOfEquipment: yup.string().required(),
     model: yup.string().required(),
+    mainFeature: yup.string().required(),
+    valueOfMainFeature: yup.number(),
     features: yup
         .array()
         .of(yup.string().required('features is a required field'))
@@ -93,7 +101,13 @@ export function CreateEquipmentForm({ type }) {
 
     const initialValues = {
         category: type === 'edit' ? equipmentForEdit.category : '',
+        typeOfEquipment:
+            type === 'edit' ? equipmentForEdit.typeOfEquipment : '',
+
         model: type === 'edit' ? equipmentForEdit.model : '',
+        mainFeature: type === 'edit' ? equipmentForEdit.mainFeature : '',
+        valueOfMainFeature:
+            type === 'edit' ? equipmentForEdit.valueOfMainFeature : '',
         features: type === 'edit' ? equipmentForEdit.features : [''],
         describe: type === 'edit' ? equipmentForEdit.describe : '',
     };
@@ -101,6 +115,7 @@ export function CreateEquipmentForm({ type }) {
     async function handleSubmit(values, { resetForm }) {
         toast.info(`Form submitted`);
         const formData = new FormData();
+        console.log(values);
 
         photos.forEach(photo => {
             formData.append('photos[]', photo);
@@ -151,6 +166,9 @@ export function CreateEquipmentForm({ type }) {
             {({ errors, touched, values }) => {
                 const isError = Object.keys(errors).length !== 0;
                 let isCategoryError = false;
+                let isTypeError = false;
+                let isMainFeatureError = false;
+                let isValueOfMainFeatureError = false;
                 let isModelError = false;
                 let isFeaturesError = false;
 
@@ -160,8 +178,29 @@ export function CreateEquipmentForm({ type }) {
                             isCategoryError = true;
                         }
 
+                        if (
+                            errorName === 'typeOfEquipment' &&
+                            touch === 'typeOfEquipment'
+                        ) {
+                            isTypeError = true;
+                        }
+
                         if (errorName === 'model' && touch === 'model') {
                             isModelError = true;
+                        }
+
+                        if (
+                            errorName === 'mainFeature' &&
+                            touch === 'mainFeature'
+                        ) {
+                            isMainFeatureError = true;
+                        }
+
+                        if (
+                            errorName === 'mainFeature' &&
+                            touch === 'mainFeature'
+                        ) {
+                            isValueOfMainFeatureError = true;
                         }
 
                         if (errorName === 'features' && touch === 'features') {
@@ -201,6 +240,108 @@ export function CreateEquipmentForm({ type }) {
                                     name="category"
                                 />
                             </label>
+                            <label className={createFormLabel}>
+                                <span className={createFormTitle}>* Тип:</span>
+                                <Field
+                                    className={
+                                        isTypeError
+                                            ? `${createFormSelect} ${createFormInputError}`
+                                            : createFormSelect
+                                    }
+                                    as="select"
+                                    name="typeOfEquipment"
+                                >
+                                    <option value="other" defaultValue>
+                                        Інше
+                                    </option>
+                                    {arrOfTypes.map(type => (
+                                        <option key={type} value={type}>
+                                            {capitalizeFirstLetter(type)}
+                                        </option>
+                                    ))}
+                                </Field>
+                                <ErrorMessage
+                                    className={createFormError}
+                                    component="p"
+                                    name="typeOfEquipment"
+                                />
+                            </label>
+                            <div className={createFormRadioGroup} role="group">
+                                <span className={createFormTitle}>
+                                    * Основна характеристика:
+                                </span>
+                                <label className={createFormRadioLabel}>
+                                    <Field
+                                        className={
+                                            isMainFeatureError
+                                                ? `${createFormRadio} ${createFormInputError}`
+                                                : createFormRadio
+                                        }
+                                        type="radio"
+                                        name="mainFeature"
+                                        value="-"
+                                        checked
+                                    />
+                                    <span className={createFormRadioTitle}>
+                                        Інше
+                                    </span>
+                                </label>
+                                <label className={createFormRadioLabel}>
+                                    <Field
+                                        className={
+                                            isMainFeatureError
+                                                ? `${createFormRadio} ${createFormInputError}`
+                                                : createFormRadio
+                                        }
+                                        type="radio"
+                                        name="mainFeature"
+                                        value="Сила пресу"
+                                    />
+                                    <span className={createFormRadioTitle}>
+                                        Сила пресу, МН:
+                                    </span>
+                                </label>
+                                <label className={createFormRadioLabel}>
+                                    <Field
+                                        className={
+                                            isMainFeatureError
+                                                ? `${createFormRadio} ${createFormInputError}`
+                                                : createFormRadio
+                                        }
+                                        type="radio"
+                                        name="mainFeature"
+                                        value="Маса падаючих частин"
+                                    />
+                                    <span className={createFormRadioTitle}>
+                                        Маса падаючих частин, кг:
+                                    </span>
+                                </label>
+                                <label className={createFormRadioValueLabel}>
+                                    <span className={createFormRadioTitle}>
+                                        Значення:
+                                    </span>
+                                    <Field
+                                        className={
+                                            isValueOfMainFeatureError
+                                                ? `${createFormInput} ${createFormInputError}`
+                                                : createFormInput
+                                        }
+                                        type="text"
+                                        name="valueOfMainFeature"
+                                    />
+                                </label>
+                                <ErrorMessage
+                                    className={createFormError}
+                                    component="p"
+                                    name="valueOfMainFeature"
+                                />
+                                <ErrorMessage
+                                    className={createFormError}
+                                    component="p"
+                                    name="mainFeature"
+                                />
+                            </div>
+
                             <label className={createFormLabel}>
                                 <span className={createFormTitle}>
                                     * Модель:

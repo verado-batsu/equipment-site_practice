@@ -37,6 +37,21 @@
 	}
 }
 
+.createFormRadioLabel {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	position: relative;
+	margin-bottom: 5px;
+}
+.createFormRadioValueLabel {
+	display: flex;
+}
+
+.createFormRadioGroup {
+	margin-bottom: 28px;
+}
+
 .createFormTitle {
 	display: block;
 	margin-bottom: 8px;
@@ -49,6 +64,15 @@
 	@media screen and (min-width: $desktop) {
 		margin-bottom: 12px;
 	}
+}
+
+.createFormRadioTitle {
+	margin-right: 5px;
+
+	color: #173d33;
+	text-align: justify;
+	font-size: 16px;
+	letter-spacing: -0.64px;
 }
 
 .createFormInput {
@@ -71,6 +95,24 @@
 .createFormSelect {
 	width: 100%;
 	padding: 8px;
+
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid #97d28b;
+	color: #828382;
+	font-size: 18px;
+	letter-spacing: -0.72px;
+
+	cursor: pointer;
+
+	@media screen and (min-width: $desktop) {
+		font-size: 20px;
+		letter-spacing: -0.8px;
+	}
+}
+
+.createFormRadio {
+	margin: 0;
 
 	background-color: transparent;
 	border: none;
