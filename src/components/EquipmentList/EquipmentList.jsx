@@ -11,6 +11,7 @@ const {
     equipmentItem,
     equipmentLink,
     equipmentCardContent,
+    equipmentCardMainFeatures,
 } = styles;
 
 export function EquipmentList({ equipments }) {
@@ -44,6 +45,17 @@ export function EquipmentList({ equipments }) {
                                         >
                                             {equipment.model}
                                         </Typography>
+                                        {equipment.mainFeature !== 'other' && (
+                                            <p
+                                                className={
+                                                    equipmentCardMainFeatures
+                                                }
+                                            >
+                                                {equipment.mainFeature}:{' '}
+                                                {equipment.valueOfMainFeature}
+                                            </p>
+                                        )}
+
                                         <Typography
                                             gutterBottom
                                             variant="subtitle2"
