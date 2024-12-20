@@ -28,7 +28,7 @@ export const equipmentsApi = createApi({
 	endpoints: (builder) => ({
 		getEquipments: builder.query({
 			query: ({categoryParam = '',
-        queryParam = '', pageParam = 1, limitParam = 4}) => ({ url: `/equipments?page=${pageParam}&limit=${limitParam}&category=${categoryParam}&q=${queryParam}` }),
+        queryParam = '', pageParam = 1, limitParam = 4, ppParam = '', fpParam = ''}) => ({ url: `/equipments?page=${pageParam}&limit=${limitParam}&category=${categoryParam}&q=${queryParam}&pp=${ppParam}&fp=${fpParam}` }),
 			providesTags: ['Equipments'],
 		}),
 		getEquipmentById: builder.query({

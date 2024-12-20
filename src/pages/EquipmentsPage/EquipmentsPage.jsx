@@ -21,6 +21,8 @@ export function EquipmentsPage() {
     const [pageParam, setPageParam] = useState(1);
     const [limitParam, setLimitParam] = useState(4);
     const [category, setCategory] = useState('all');
+    const [ppParam, setPpParam] = useState('');
+    const [fpParam, setFpParam] = useState('');
 
     const isDesktop = useMediaQuery({ query: '(min-width: 1440px)' });
 
@@ -29,6 +31,8 @@ export function EquipmentsPage() {
         queryParam,
         pageParam,
         limitParam,
+        ppParam,
+        fpParam,
     });
 
     useEffect(() => {
@@ -55,9 +59,16 @@ export function EquipmentsPage() {
     function handleSearchSubmit(e) {
         e.preventDefault();
 
-        const searchedModel = e.target.model.value;
+        const filterTitle = e.target.filter.value;
+        const searchedQuery = e.target.query.value;
 
-        setQueryParam(searchedModel);
+        if (filterTitle === 'pp') {
+            setPpParam(searchedQuery);
+        } else if (filterTitle === 'fp') {
+            setFpParam(searchedQuery);
+        } else {
+            setQueryParam(searchedQuery);
+        }
     }
 
     function handlePaginationChange(e, page) {

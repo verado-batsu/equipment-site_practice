@@ -115,7 +115,13 @@ export function CreateEquipmentForm({ type }) {
     async function handleSubmit(values, { resetForm }) {
         toast.info(`Form submitted`);
         const formData = new FormData();
-        console.log(values);
+
+        if (values.valueOfMainFeature === '') {
+            delete values.valueOfMainFeature;
+        }
+        if (values.describe === '') {
+            delete values.describe;
+        }
 
         photos.forEach(photo => {
             formData.append('photos[]', photo);
@@ -279,8 +285,7 @@ export function CreateEquipmentForm({ type }) {
                                         }
                                         type="radio"
                                         name="mainFeature"
-                                        value="-"
-                                        checked
+                                        value="other"
                                     />
                                     <span className={createFormRadioTitle}>
                                         Інше
@@ -295,7 +300,7 @@ export function CreateEquipmentForm({ type }) {
                                         }
                                         type="radio"
                                         name="mainFeature"
-                                        value="Сила пресу"
+                                        value="Сила преса, МН"
                                     />
                                     <span className={createFormRadioTitle}>
                                         Сила пресу, МН:
@@ -310,26 +315,31 @@ export function CreateEquipmentForm({ type }) {
                                         }
                                         type="radio"
                                         name="mainFeature"
-                                        value="Маса падаючих частин"
+                                        value="Маса падаючих частин, кг"
                                     />
                                     <span className={createFormRadioTitle}>
                                         Маса падаючих частин, кг:
                                     </span>
                                 </label>
-                                <label className={createFormRadioValueLabel}>
-                                    <span className={createFormRadioTitle}>
-                                        Значення:
-                                    </span>
-                                    <Field
-                                        className={
-                                            isValueOfMainFeatureError
-                                                ? `${createFormInput} ${createFormInputError}`
-                                                : createFormInput
-                                        }
-                                        type="text"
-                                        name="valueOfMainFeature"
-                                    />
-                                </label>
+                                {values.mainFeature !== 'other' && (
+                                    <label
+                                        className={createFormRadioValueLabel}
+                                    >
+                                        <span className={createFormRadioTitle}>
+                                            Значення:
+                                        </span>
+                                        <Field
+                                            className={
+                                                isValueOfMainFeatureError
+                                                    ? `${createFormInput} ${createFormInputError}`
+                                                    : createFormInput
+                                            }
+                                            type="text"
+                                            name="valueOfMainFeature"
+                                        />
+                                    </label>
+                                )}
+
                                 <ErrorMessage
                                     className={createFormError}
                                     component="p"

@@ -1,6 +1,8 @@
 @import "constants/sizes";
 
 .searchForm {
+	display: flex;
+	align-items: center;
 	margin-bottom: 10px;
 }
 

@@ -10,9 +10,11 @@ import { ToEditFormButton } from 'components/ToEditFormBtn/ToEditFormBtn';
 import styles from './EquipmentDetailsCard.module.scss';
 const {
     detailsWrapper,
+    equipmentType,
     equipmentFeatures,
     equipmentFeaturesList,
     equipmentFeaturesItem,
+    equipmentMainFeaturesItem,
     equipmentDescr,
 } = styles;
 
@@ -43,8 +45,23 @@ export function EquipmentDetailsCard({ equipment }) {
                     >
                         Останні зміни додав {equipment?.owner.name || ''}
                     </Typography>
+                    <p className={equipmentType}>
+                        Тип: {equipment.typeOfEquipment}
+                    </p>
                     <Typography variant="h6">Характеристики:</Typography>
                     <ul className={equipmentFeaturesList}>
+                        {equipment.mainFeature !== 'other' && (
+                            <li
+                                className={equipmentMainFeaturesItem}
+                                key={equipment.mainFeature}
+                            >
+                                <p>
+                                    {equipment.mainFeature}:{' '}
+                                    {equipment.valueOfMainFeature}
+                                </p>
+                            </li>
+                        )}
+
                         {equipment?.features.map((feature, i) => (
                             <li key={i} className={equipmentFeaturesItem}>
                                 <Typography

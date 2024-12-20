@@ -17,6 +17,10 @@
 	}
 }
 
+.equipmentType {
+	margin-bottom: 20px;
+}
+
 .equipmentImg {
 	width: 100%;
 }
@@ -35,6 +39,11 @@
 		grid-row-end: 2;
 		grid-column-start: 2;
 	}
+}
+
+.equipmentMainFeaturesItem {
+	font-size: 16px;
+	font-weight: 700;
 }
 
 .equipmentDescr {
