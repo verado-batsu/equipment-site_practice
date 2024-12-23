@@ -58,6 +58,9 @@ export function EquipmentsPage() {
 
     function handleSearchSubmit(e) {
         e.preventDefault();
+        setPpParam('');
+        setFpParam('');
+        setQueryParam('');
 
         const filterTitle = e.target.filter.value;
         const searchedQuery = e.target.query.value;
