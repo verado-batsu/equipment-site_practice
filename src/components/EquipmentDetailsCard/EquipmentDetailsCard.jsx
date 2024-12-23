@@ -75,16 +75,18 @@ export function EquipmentDetailsCard({ equipment }) {
                     </ul>
                 </CardContent>
             </Card>
-            <Card className={equipmentDescr}>
-                <CardContent>
-                    <Typography
-                        variant="body2"
-                        style={{ whiteSpace: 'pre-wrap' }}
-                    >
-                        {equipment?.describe || ''}
-                    </Typography>
-                </CardContent>
-            </Card>
+            {equipment.describe && (
+                <Card className={equipmentDescr}>
+                    <CardContent>
+                        <Typography
+                            variant="body2"
+                            style={{ whiteSpace: 'pre-wrap' }}
+                        >
+                            {equipment?.describe || ''}
+                        </Typography>
+                    </CardContent>
+                </Card>
+            )}
         </div>
     );
 }
