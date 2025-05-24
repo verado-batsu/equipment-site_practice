@@ -8,7 +8,7 @@ export function HomePage() {
         <section className={home}>
             <div className="container">
                 <h1 className={homeTitle}>
-                    Ласкаво просимо у каталог обладнань для обробки тиском
+                    Ласкаво просимо у каталог обладнання для обробки тиском
                 </h1>
                 <p className={homeDescription}>
                     На сайті ви можете подивитись каталог всіх доданих
